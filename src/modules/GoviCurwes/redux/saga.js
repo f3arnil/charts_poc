@@ -2,7 +2,7 @@ import {
   all,
   put,
   takeLatest,
-  delay,
+  call,
 } from 'redux-saga/effects';
 import {
   GOVI_CURWES,
@@ -12,31 +12,34 @@ import {
   requestClearGoviCurwes,
 } from './reducer';
 
+import { fetchGoviCurwes } from '@/services/api';
+
 export function* getGoviCurwesData() {
   yield put(requestGoviCurwes());
   // const data = yield call(getSystemDataApi)
-  yield delay(1500);
-  yield put(responseGoviCurwes({
-    list: [
-      {
-        name: 'Cad',
-        data: [2.6, 0.3, 0.1, 2.2],
-      },
-      {
-        name: 'Eur',
-        data: [-3.5, -4.4, 3.0, -5.8],
-      },
-      {
-        name: 'GBP',
-        data: [-3.4, 3.1, -2.9, -2.9],
-      },
-      {
-        name: 'USD',
-        data: [-0.1, -1.7, -2.7, -3.7],
-      },
-    ],
-    change: [5, 7, 10, 25],
-  }));
+  const data = yield call(fetchGoviCurwes);
+  yield put(responseGoviCurwes(data));
+  // {
+  //   list: [
+  //     {
+  //       name: 'Cad',
+  //       data: [2.6, 0.3, 0.1, 2.2],
+  //     },
+  //     {
+  //       name: 'Eur',
+  //       data: [-3.5, -4.4, 3.0, -5.8],
+  //     },
+  //     {
+  //       name: 'GBP',
+  //       data: [-3.4, 3.1, -2.9, -2.9],
+  //     },
+  //     {
+  //       name: 'USD',
+  //       data: [-0.1, -1.7, -2.7, -3.7],
+  //     },
+  //   ],
+  //   change: [5, 7, 10, 25],
+  // }
 }
 
 export function* clearGoviCurwesData() {

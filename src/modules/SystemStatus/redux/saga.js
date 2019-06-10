@@ -2,7 +2,7 @@ import {
   all,
   put,
   takeLatest,
-  delay,
+  call,
 } from 'redux-saga/effects';
 import {
   SYSTEM_STATUS,
@@ -11,21 +11,23 @@ import {
   requestSystemStatus,
   requestClearSystemStatus,
 } from './reducer';
+import { fetchSystemStatus } from '@/services/api';
 
 export function* getSystemStatusData() {
   yield put(requestSystemStatus());
-  // const data = yield call(getSystemDataApi)
-  yield delay(1500);
-  yield put(responseSystemStatus([
-    {
-      date: '10.04.2019',
-      description: 'Some amazing description',
-    },
-    {
-      date: '27.03.2019',
-      description: 'Another amazing description',
-    },
-  ]));
+  const data = yield call(fetchSystemStatus);
+  // yield delay(1500);
+  yield put(responseSystemStatus(data));
+  //   [
+  //   {
+  //     date: '10.04.2019',
+  //     description: 'Some amazing description',
+  //   },
+  //   {
+  //     date: '27.03.2019',
+  //     description: 'Another amazing description',
+  //   },
+  // ]));
 }
 
 export function* clearSystemStatusData() {

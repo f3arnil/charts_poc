@@ -2,7 +2,7 @@ import {
   all,
   put,
   takeLatest,
-  delay,
+  call,
 } from 'redux-saga/effects';
 import {
   RSX_BOTTOM_UP,
@@ -11,14 +11,16 @@ import {
   requestRSXBottomUp,
   requestClearRSXBottomUp,
 } from './reducer';
+import { fetchRSXBottomUp } from '@/services/api';
 
 export function* getRSXBottomUpData() {
   yield put(requestRSXBottomUp());
   // const data = yield call(getSystemDataApi)
-  yield delay(1500);
-  yield put(responseRSXBottomUp({
-    values: [24, 79, 94],
-  }));
+  const data = yield call(fetchRSXBottomUp);
+  yield put(responseRSXBottomUp(data));
+  // {
+  //   values: [24, 79, 94],
+  // }));
 }
 
 export function* clearRSXBottomUpData() {

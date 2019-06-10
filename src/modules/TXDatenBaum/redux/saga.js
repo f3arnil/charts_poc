@@ -2,7 +2,7 @@ import {
   all,
   put,
   takeLatest,
-  delay,
+  call,
 } from 'redux-saga/effects';
 import {
   TX_DATEN_BAUM,
@@ -11,15 +11,17 @@ import {
   requestTXDatenBaum,
   requestClearTXDatenBaum,
 } from './reducer';
+import { fetchTXDatenBaum } from '@/services/api';
 
 export function* getTXDatenBaumData() {
   yield put(requestTXDatenBaum());
-  // const data = yield call(getSystemDataApi)
-  yield delay(1500);
-  yield put(responseTXDatenBaum({
-    values: [70, 10, 30],
-    tree: [],
-  }));
+  const data = yield call(fetchTXDatenBaum);
+  // yield delay(1500);
+  yield put(responseTXDatenBaum(data));
+  //   {
+  //   values: [70, 10, 30],
+  //   tree: [],
+  // }));
 }
 
 export function* clearTXDatenBaumData() {

@@ -71,7 +71,7 @@ const API_SERVICE_PORT = 3001
 const app = express()
 
 app.get('/api/test', (req, res) => {
-  res.send(JSON.stringify({ status: 'success', data: `Hello World ${faker.name.findName()}!` }))
+  res.send(JSON.stringify({ data: `Hello World ${faker.name.findName()}!` }))
 });
 
 app.get('/api/checkscorecard', (req, res) => {
@@ -91,7 +91,7 @@ app.get('/api/checkscorecard', (req, res) => {
       persentGelb: faker.random.number({ min: 1, max: 100 }),
     })
   }
-  res.send(JSON.stringify({ status: 'success', data }))
+  res.send(JSON.stringify(data))
 });
 
 app.get('/api/govicurwes', (req, res) => {
@@ -120,7 +120,7 @@ app.get('/api/govicurwes', (req, res) => {
     data.change.push(faker.random.number({ min: 3, max: 30 }));
   }
 
-  res.send(JSON.stringify({ status: 'success', data }))
+  res.send(JSON.stringify(data))
 });
 
 app.get('/api/gruppe', (req, res) => {
@@ -153,7 +153,7 @@ app.get('/api/gruppe', (req, res) => {
     })
   }
 
-  res.send(JSON.stringify({ status: 'success', data }))
+  res.send(JSON.stringify(data))
 });
 
 app.get('/api/kurs', (req, res) => {
@@ -181,7 +181,7 @@ app.get('/api/kurs', (req, res) => {
       value: fakeValue(),
     })
   }
-  res.send(JSON.stringify({ status: 'success', data: { kurs, allocations }}))
+  res.send(JSON.stringify({ kurs, allocations }))
 });
 
 app.get('/api/rsxbottomup', (req, res) => {
@@ -193,10 +193,11 @@ app.get('/api/rsxbottomup', (req, res) => {
       value: faker.random.number({ min: 15, max: 90 })
     })
   }
-  res.send(JSON.stringify({ status: 'success', data }))
+  res.send(JSON.stringify(data))
 });
 
 app.get('/api/scheduling', (req, res) => {
+  const data = [];
   for (let i = 0; i < 25; i++) {
     data.push({
       date: faker.date.recent(40),
@@ -205,7 +206,7 @@ app.get('/api/scheduling', (req, res) => {
       description: faker.lorem.sentence(4),
     })
   }
-  res.send(JSON.stringify({ status: 'success', data }))
+  res.send(JSON.stringify(data))
 });
 
 app.get('/api/sqdatenbaum', (req, res) => {
@@ -218,7 +219,7 @@ app.get('/api/sqdatenbaum', (req, res) => {
       treeData: []
     })
   }
-  res.send(JSON.stringify({ status: 'success', data }))
+  res.send(JSON.stringify(data))
 });
 
 app.get('/api/swapcurwes', (req, res) => {
@@ -247,7 +248,7 @@ app.get('/api/swapcurwes', (req, res) => {
     data.change.push(faker.random.number({ min: 3, max: 30 }));
   }
 
-  res.send(JSON.stringify({ status: 'success', data }))
+  res.send(JSON.stringify(data))
 });
 
 app.get('/api/systemstatus', (req, res) => {
@@ -259,7 +260,7 @@ app.get('/api/systemstatus', (req, res) => {
       description: faker.lorem.sentence(5),
     })
   }
-  res.send(JSON.stringify({ status: 'success', data }))
+  res.send(JSON.stringify(data))
 });
 
 app.get('/api/txdatenbaum', (req, res) => {
@@ -272,7 +273,7 @@ app.get('/api/txdatenbaum', (req, res) => {
       treeData: []
     })
   }
-  res.send(JSON.stringify({ status: 'success', data }))
+  res.send(JSON.stringify(data))
 });
 
 checkBrowsers(paths.appPath, isInteractive)

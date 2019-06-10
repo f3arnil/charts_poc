@@ -2,7 +2,7 @@ import {
   all,
   put,
   takeLatest,
-  delay,
+  call,
 } from 'redux-saga/effects';
 import {
   SQ_DATEN_BAUM,
@@ -11,15 +11,17 @@ import {
   requestSQDatenBaum,
   requestClearSQDatenBaum,
 } from './reducer';
+import { fetchSQDatenBaum } from '@/services/api';
 
 export function* getSQDatenBaumData() {
   yield put(requestSQDatenBaum());
-  // const data = yield call(getSystemDataApi)
-  yield delay(1500);
-  yield put(responseSQDatenBaum({
-    values: [34, 79, 11],
-    tree: [],
-  }));
+  const data = yield call(fetchSQDatenBaum);
+  // yield delay(1500);
+  yield put(responseSQDatenBaum(data));
+  //   {
+  //   values: [34, 79, 11],
+  //   tree: [],
+  // }));
 }
 
 export function* clearSQDatenBaumData() {
