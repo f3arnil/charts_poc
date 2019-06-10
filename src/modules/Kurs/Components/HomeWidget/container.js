@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 
 import {
   getKursState,
-  getKursData,
+  getAllocations,
+  getKurs,
   beginRequestKurs,
   beginClearKurs,
 } from '../../redux';
@@ -11,11 +12,13 @@ import KursWidget from './component';
 export default connect(
   (state) => {
     const status = getKursState(state);
-    const data = getKursData(state);
+    const kurs = getKurs(state);
+    const allocations = getAllocations(state);
 
     return {
       status,
-      data,
+      kurs,
+      allocations,
     };
   },
   {

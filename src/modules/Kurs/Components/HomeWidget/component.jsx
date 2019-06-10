@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { noop } from 'lodash';
 
 import { STATUSES } from '@/constants/redux';
-
+// title: 'Kurs wahrung',
+// title: 'Allocations factor',
 const WIDGET_TITLE = 'Kurs wahrung & Allocations factor';
 
 class KursWidget extends React.PureComponent {
@@ -22,7 +23,7 @@ class KursWidget extends React.PureComponent {
   }
 
   render() {
-    const { status, data } = this.props;
+    const { status, kurs, allocations } = this.props;
 
     return (
       <div className="system-status-block">
@@ -30,7 +31,8 @@ class KursWidget extends React.PureComponent {
           <p>{WIDGET_TITLE}</p>
         </div>
         <p>{ `${WIDGET_TITLE} status state is: ${status}.` }</p>
-        <p>{ `Data list is: ${JSON.stringify(data)}.` }</p>
+        <p>{ `Kurs list is: ${JSON.stringify(kurs)}.` }</p>
+        <p>{ `Allocations list is: ${JSON.stringify(allocations)}.` }</p>
       </div>
     );
   }
@@ -40,14 +42,16 @@ KursWidget.defaultProps = {
   getData: noop,
   clearData: noop,
   status: STATUSES.NOT_REQUESTED,
-  data: [],
+  kurs: {},
+  allocations: {},
 };
 
 KursWidget.propTypes = {
   getData: PropTypes.func,
   clearData: PropTypes.func,
   status: PropTypes.string,
-  data: PropTypes.arrayOf(PropTypes.object),
+  kurs: PropTypes.arrayOf(PropTypes.object),
+  allocations: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default KursWidget;
