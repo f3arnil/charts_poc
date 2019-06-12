@@ -9,28 +9,30 @@ const WIDGET_TITLE = 'Scheduling';
 class SchedulingWidget extends React.PureComponent {
   componentDidMount() {
     const { status, getData } = this.props;
-
+    // console.warn(status);
     if (status === STATUSES.NOT_REQUESTED) {
       getData();
     }
   }
 
-  componentWillUnmount() {
-    const { clearData } = this.props;
+  // componentWillUnmount() {
+  //   const { clearData } = this.props;
 
-    clearData();
-  }
+  //   clearData();
+  // }
 
   render() {
     const { status, events } = this.props;
-
+    // console.warn(status);
     return (
       <div className="system-status-block">
         <div className="title">
           <p>{WIDGET_TITLE}</p>
         </div>
-        <p>{ `${WIDGET_TITLE} state is: ${status}.` }</p>
-        <p>{ `Events length is: ${events.length}.` }</p>
+        <div className="content">
+          <p>{ `${WIDGET_TITLE} state is: ${status}.` }</p>
+          <p>{ `Events length is: ${events.length}.` }</p>
+        </div>
       </div>
     );
   }
@@ -38,14 +40,14 @@ class SchedulingWidget extends React.PureComponent {
 
 SchedulingWidget.defaultProps = {
   getData: noop,
-  clearData: noop,
+  // clearData: noop,
   status: STATUSES.NOT_REQUESTED,
   events: [],
 };
 
 SchedulingWidget.propTypes = {
   getData: PropTypes.func,
-  clearData: PropTypes.func,
+  // clearData: PropTypes.func,
   status: PropTypes.string,
   events: PropTypes.arrayOf(PropTypes.object),
 };

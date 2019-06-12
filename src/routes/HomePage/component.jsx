@@ -1,30 +1,16 @@
 import React from 'react';
-import { SystemStatusWidget } from '@/modules/SystemStatus/Components';
-import { SwapCurwesWidget } from '@/modules/SwapCurwes/Components';
-import { SQDatenBaumWidget } from '@/modules/SQDatenBaum/Components';
-import { TXDatenBaumWidget } from '@/modules/TXDatenBaum/Components';
-import { SchedulingWidget } from '@/modules/Scheduling/Components';
-import { RSXBottomUpWidget } from '@/modules/RSXBottomUp/Components';
-import { KursWidget } from '@/modules/Kurs/Components';
-import { GruppeWidget } from '@/modules/Gruppe/Components';
-import { GoviCurwesWidget } from '@/modules/GoviCurwes/Components';
-import { CheckScoreCardWidget } from '@/modules/CheckScoreCard/Components';
+import { DragDropContextProvider } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
+import Container from '@/components/HomePage/Content';
 
 const HomePage = () => {
   return (
-    <>
-      <h1>Hello motherfucker!!</h1>
-      <SystemStatusWidget />
-      <SwapCurwesWidget />
-      <SQDatenBaumWidget />
-      <TXDatenBaumWidget />
-      <SchedulingWidget />
-      <RSXBottomUpWidget />
-      <KursWidget />
-      <GruppeWidget />
-      <GoviCurwesWidget />
-      <CheckScoreCardWidget />
-    </>
+    <div className="home-page-content">
+      <DragDropContextProvider backend={HTML5Backend}>
+        <Container />
+      </DragDropContextProvider>
+    </div>
   );
 };
 
