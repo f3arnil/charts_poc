@@ -15,12 +15,6 @@ class GruppeWidget extends React.PureComponent {
     }
   }
 
-  componentWillUnmount() {
-    const { clearData } = this.props;
-
-    clearData();
-  }
-
   render() {
     const { status, data } = this.props;
 
@@ -38,14 +32,12 @@ class GruppeWidget extends React.PureComponent {
 
 GruppeWidget.defaultProps = {
   getData: noop,
-  clearData: noop,
   status: STATUSES.NOT_REQUESTED,
   data: [],
 };
 
 GruppeWidget.propTypes = {
   getData: PropTypes.func,
-  clearData: PropTypes.func,
   status: PropTypes.string,
   data: PropTypes.arrayOf(PropTypes.object),
 };

@@ -4,7 +4,6 @@ import {
   getRSXBottomUpState,
   getRSXBottomUpValues,
   beginRequestRSXBottomUp,
-  beginClearRSXBottomUp,
 } from '../../redux';
 import RSXBottomUpWidget from './component';
 
@@ -20,6 +19,5 @@ export default connect(
   },
   {
     getData: beginRequestRSXBottomUp,
-    clearData: beginClearRSXBottomUp,
   },
 )(RSXBottomUpWidget);

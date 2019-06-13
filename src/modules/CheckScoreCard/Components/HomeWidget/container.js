@@ -4,7 +4,6 @@ import {
   getCheckScoreCardDataState,
   getCheckScoreCardData,
   beginRequestCheckScoreCardData,
-  beginClearCheckScoreCardData,
 } from '../../redux';
 import CheckScoreCardWidget from './component';
 
@@ -20,6 +19,5 @@ export default connect(
   },
   {
     getData: beginRequestCheckScoreCardData,
-    clearData: beginClearCheckScoreCardData,
   },
 )(CheckScoreCardWidget);

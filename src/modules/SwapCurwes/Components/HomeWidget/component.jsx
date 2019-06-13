@@ -15,12 +15,6 @@ class SwapCurwesWidget extends React.PureComponent {
     }
   }
 
-  componentWillUnmount() {
-    const { clearData } = this.props;
-
-    clearData();
-  }
-
   render() {
     const { status, list, change } = this.props;
 
@@ -39,7 +33,6 @@ class SwapCurwesWidget extends React.PureComponent {
 
 SwapCurwesWidget.defaultProps = {
   getData: noop,
-  clearData: noop,
   status: STATUSES.NOT_REQUESTED,
   list: [],
   change: [],
@@ -47,7 +40,6 @@ SwapCurwesWidget.defaultProps = {
 
 SwapCurwesWidget.propTypes = {
   getData: PropTypes.func,
-  clearData: PropTypes.func,
   status: PropTypes.string,
   list: PropTypes.arrayOf(PropTypes.object),
   change: PropTypes.arrayOf(PropTypes.number),

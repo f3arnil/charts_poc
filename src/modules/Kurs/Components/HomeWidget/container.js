@@ -5,7 +5,6 @@ import {
   getAllocations,
   getKurs,
   beginRequestKurs,
-  beginClearKurs,
 } from '../../redux';
 import KursWidget from './component';
 
@@ -23,6 +22,5 @@ export default connect(
   },
   {
     getData: beginRequestKurs,
-    clearData: beginClearKurs,
   },
 )(KursWidget);

@@ -15,12 +15,6 @@ class RSXBottomUpWidget extends React.PureComponent {
     }
   }
 
-  componentWillUnmount() {
-    const { clearData } = this.props;
-
-    clearData();
-  }
-
   render() {
     const { status, values } = this.props;
 
@@ -38,14 +32,12 @@ class RSXBottomUpWidget extends React.PureComponent {
 
 RSXBottomUpWidget.defaultProps = {
   getData: noop,
-  clearData: noop,
   status: STATUSES.NOT_REQUESTED,
   values: [],
 };
 
 RSXBottomUpWidget.propTypes = {
   getData: PropTypes.func,
-  clearData: PropTypes.func,
   status: PropTypes.string,
   values: PropTypes.arrayOf(PropTypes.object),
 };

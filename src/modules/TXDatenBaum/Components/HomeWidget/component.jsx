@@ -15,12 +15,6 @@ class TXDatenBaumWidget extends React.PureComponent {
     }
   }
 
-  componentWillUnmount() {
-    const { clearData } = this.props;
-
-    clearData();
-  }
-
   render() {
     const { status, values, tree } = this.props;
 
@@ -39,7 +33,6 @@ class TXDatenBaumWidget extends React.PureComponent {
 
 TXDatenBaumWidget.defaultProps = {
   getData: noop,
-  clearData: noop,
   status: STATUSES.NOT_REQUESTED,
   values: [],
   tree: [],
@@ -47,7 +40,6 @@ TXDatenBaumWidget.defaultProps = {
 
 TXDatenBaumWidget.propTypes = {
   getData: PropTypes.func,
-  clearData: PropTypes.func,
   status: PropTypes.string,
   values: PropTypes.arrayOf(PropTypes.object),
   tree: PropTypes.arrayOf(PropTypes.number),

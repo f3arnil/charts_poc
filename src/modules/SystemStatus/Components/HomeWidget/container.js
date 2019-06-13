@@ -4,7 +4,6 @@ import {
   getSystemStatusState,
   getSystemStatusEvents,
   beginRequestSystemStatus,
-  beginClearSystemStatus,
 } from '../../redux';
 import SystemStatusWidget from './component';
 
@@ -20,6 +19,5 @@ export default connect(
   },
   {
     getData: beginRequestSystemStatus,
-    clearData: beginClearSystemStatus,
   },
 )(SystemStatusWidget);

@@ -5,7 +5,6 @@ import {
   getSQDatenBaumValues,
   getSQDatenBaumTree,
   beginRequestSQDatenBaum,
-  beginClearSQDatenBaum,
 } from '../../redux';
 
 import SQDatenBaumWidget from './component';
@@ -24,6 +23,5 @@ export default connect(
   },
   {
     getData: beginRequestSQDatenBaum,
-    clearData: beginClearSQDatenBaum,
   },
 )(SQDatenBaumWidget);

@@ -16,12 +16,6 @@ class KursWidget extends React.PureComponent {
     }
   }
 
-  componentWillUnmount() {
-    const { clearData } = this.props;
-
-    clearData();
-  }
-
   render() {
     const { status, kurs, allocations } = this.props;
 
@@ -40,7 +34,6 @@ class KursWidget extends React.PureComponent {
 
 KursWidget.defaultProps = {
   getData: noop,
-  clearData: noop,
   status: STATUSES.NOT_REQUESTED,
   kurs: {},
   allocations: {},
@@ -48,7 +41,6 @@ KursWidget.defaultProps = {
 
 KursWidget.propTypes = {
   getData: PropTypes.func,
-  clearData: PropTypes.func,
   status: PropTypes.string,
   kurs: PropTypes.arrayOf(PropTypes.object),
   allocations: PropTypes.arrayOf(PropTypes.object),

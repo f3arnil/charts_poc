@@ -15,12 +15,6 @@ class SystemStatusWidget extends React.PureComponent {
     }
   }
 
-  componentWillUnmount() {
-    const { clearData } = this.props;
-
-    clearData();
-  }
-
   render() {
     const { status, events } = this.props;
 
@@ -38,14 +32,12 @@ class SystemStatusWidget extends React.PureComponent {
 
 SystemStatusWidget.defaultProps = {
   getData: noop,
-  clearData: noop,
   status: STATUSES.NOT_REQUESTED,
   events: [],
 };
 
 SystemStatusWidget.propTypes = {
   getData: PropTypes.func,
-  clearData: PropTypes.func,
   status: PropTypes.string,
   events: PropTypes.arrayOf(PropTypes.object),
 };

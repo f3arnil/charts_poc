@@ -5,7 +5,6 @@ import {
   getGoviCurwesDataList,
   getGoviCurwesDataChange,
   beginRequestGoviCurwes,
-  beginClearGoviCurwes,
 } from '../../redux';
 import GoviCurwesWidget from './component';
 
@@ -23,6 +22,5 @@ export default connect(
   },
   {
     getData: beginRequestGoviCurwes,
-    clearData: beginClearGoviCurwes,
   },
 )(GoviCurwesWidget);

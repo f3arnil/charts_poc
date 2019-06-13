@@ -15,12 +15,6 @@ class GoviCurwesWidget extends React.PureComponent {
     }
   }
 
-  componentWillUnmount() {
-    const { clearData } = this.props;
-
-    clearData();
-  }
-
   render() {
     const { status, list, change } = this.props;
 
@@ -39,7 +33,6 @@ class GoviCurwesWidget extends React.PureComponent {
 
 GoviCurwesWidget.defaultProps = {
   getData: noop,
-  clearData: noop,
   status: STATUSES.NOT_REQUESTED,
   list: [],
   change: [],
@@ -47,7 +40,6 @@ GoviCurwesWidget.defaultProps = {
 
 GoviCurwesWidget.propTypes = {
   getData: PropTypes.func,
-  clearData: PropTypes.func,
   status: PropTypes.string,
   list: PropTypes.arrayOf(PropTypes.object),
   change: PropTypes.arrayOf(PropTypes.number),

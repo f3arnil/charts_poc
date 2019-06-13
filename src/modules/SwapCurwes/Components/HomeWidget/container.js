@@ -5,7 +5,6 @@ import {
   getSwapCurwesDataList,
   getSwapCurwesDataChange,
   beginRequestSwapCurwes,
-  beginClearSwapCurwes,
 } from '../../redux';
 import SwapCurwesWidget from './component';
 
@@ -23,6 +22,5 @@ export default connect(
   },
   {
     getData: beginRequestSwapCurwes,
-    clearData: beginClearSwapCurwes,
   },
 )(SwapCurwesWidget);

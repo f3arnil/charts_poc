@@ -15,12 +15,6 @@ class CheckScoreCardWidget extends React.PureComponent {
     }
   }
 
-  componentWillUnmount() {
-    const { clearData } = this.props;
-
-    clearData();
-  }
-
   render() {
     const {
       status,
@@ -41,14 +35,12 @@ class CheckScoreCardWidget extends React.PureComponent {
 
 CheckScoreCardWidget.defaultProps = {
   getData: noop,
-  clearData: noop,
   status: STATUSES.NOT_REQUESTED,
   data: [],
 };
 
 CheckScoreCardWidget.propTypes = {
   getData: PropTypes.func,
-  clearData: PropTypes.func,
   status: PropTypes.string,
   data: PropTypes.arrayOf(PropTypes.object),
 };
