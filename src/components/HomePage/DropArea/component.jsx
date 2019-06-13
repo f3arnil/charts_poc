@@ -1,15 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDrop } from 'react-dnd';
+import update from 'immutability-helper';
 import PropTypes from 'prop-types';
 import { DrugableWidgetBlock as WidgetBlock } from '@/components/WidgetBlock';
 
 const style = {
   height: '100%',
   width: '20%',
-  // marginRight: '10px',
-  // marginBottom: '1.5rem',
   color: 'blcak',
-  // padding: '1rem',
   textAlign: 'center',
   fontSize: '1rem',
   lineHeight: 'normal',
@@ -21,52 +19,84 @@ const style = {
 const DrugableBlock = (props) => {
   const {
     items,
-    onDrop,
     accept,
-    index,
     name,
   } = props;
+  const [widgets, setWidgets] = useState(items);
 
-  const [{ canDrop, isOver }, drop] = useDrop({
-    accept,
-    drop: onDrop,
-    collect: monitor => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-    }),
-  });
+  const findWidget = (type) => {
+    const widget = widgets.filter(item => item.type === type)[0];
 
-  const isActive = canDrop && isOver;
-  let backgroundColor = '#e2dede';
+    return {
+      widget,
+      index: widgets.indexOf(widget),
+    };
+  };
 
-  if (isActive) {
-    backgroundColor = 'darkgreen';
-  } else if (canDrop) {
-    backgroundColor = 'darkkhaki';
-  }
+  const removeWidget = (type) => {
+    const { index } = findWidget(type);
+
+    setWidgets(
+      update(widgets, {
+        $splice: [
+          [index, 1],
+        ],
+      }),
+    );
+  };
+
+  const moveWidget = ({
+    droppedWidget = {},
+    itemsToRemove = 0,
+    removeFromIndex = 0,
+    atIndex = 0,
+  }) => {
+    const { index } = findWidget(droppedWidget.type);
+
+    if (
+      name !== droppedWidget.blockName
+      && index !== -1
+    ) {
+      return;
+    }
+
+    setWidgets(
+      update(widgets, {
+        $splice: [[removeFromIndex, itemsToRemove], [atIndex, 0, { type: droppedWidget.type }]],
+      }),
+    );
+  };
+
+  const [, drop] = useDrop({ accept });
 
   return (
-    <div ref={drop} style={Object.assign({}, style, { backgroundColor, width: name === 'center' ? '60%' : style.width })}>
-      {items.map(item => (
-        <WidgetBlock key={item} type={item} index={index} />
+    <div ref={drop} style={Object.assign({}, style)}>
+      {widgets.map((item, index) => (
+        <WidgetBlock
+          key={item.type}
+          id={index}
+          blockName={name}
+          moveWidget={moveWidget}
+          findWidget={findWidget}
+          removeWidget={removeWidget}
+          accept={accept}
+          {...item}
+
+        />
       ))}
     </div>
   );
 };
 
 DrugableBlock.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string),
-  onDrop: PropTypes.func,
+  items: PropTypes.arrayOf(PropTypes.object),
   accept: PropTypes.arrayOf(PropTypes.string),
-  index: PropTypes.number,
   name: PropTypes.string,
 };
 
 DrugableBlock.defaultProps = {
   items: [],
   accept: [],
-  onDrop: () => {},
-  index: 0,
   name: '',
 };
 

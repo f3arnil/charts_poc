@@ -18,7 +18,7 @@ const Card = ({
   const originalIndex = findCard(id).index;
 
   const [{ isDragging }, drag] = useDrag({
-    item: { type: ItemTypes.CARD, id, originalIndex },
+    item: { type, id: originalIndex },
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),
@@ -28,9 +28,8 @@ const Card = ({
     accept: ItemTypes.CARD,
     canDrop: () => false,
     hover({ id: draggedId }) {
-      if (draggedId !== id) {
-        console.error(draggedId, id);
-        const { index: overIndex } = findCard(id);
+      if (draggedId !== type) {
+        const { index: overIndex } = findCard(type);
         moveCard(draggedId, overIndex);
       }
     },

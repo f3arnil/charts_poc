@@ -16,11 +16,6 @@ const ITEMS = [
     type: WIDGET_TYPES.SYSTEM_STATUS,
   },
   {
-    id: 2,
-    text: 'Make it generic enough',
-    type: WIDGET_TYPES.SYSTEM_STATUS,
-  },
-  {
     id: 3,
     text: 'Write README',
     type: WIDGET_TYPES.SWAP_CURWES,
@@ -50,16 +45,17 @@ const ITEMS = [
 const Container = () => {
   const [cards, setCards] = useState(ITEMS);
 
-  const findCard = (id) => {
-    const card = cards.filter(c => `${c.id}` === id)[0];
+  const findCard = (type) => {
+    const card = cards.filter(c => `${c.type}` === type)[0];
+    console.warn(card);
     return {
       card,
       index: cards.indexOf(card),
     };
   };
 
-  const moveCard = (id, atIndex) => {
-    const { card, index } = findCard(id);
+  const moveCard = (type, atIndex) => {
+    const { card, index } = findCard(type);
     setCards(
       update(cards, {
         $splice: [[index, 1], [atIndex, 0, card]],
@@ -68,13 +64,13 @@ const Container = () => {
   };
 
   const [, drop] = useDrop({ accept: ItemTypes.CARD });
-
+  console.warn(cards);
   return (
     <>
       <div ref={drop} style={style}>
         {cards.map(card => (
           <Card
-            key={card.id}
+            key={card.type}
             id={`${card.id}`}
             text={card.text}
             moveCard={moveCard}
