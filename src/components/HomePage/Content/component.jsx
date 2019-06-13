@@ -5,8 +5,8 @@ import { get } from 'lodash';
 import DropArea from '@/components/HomePage/DropArea';
 import {
   LEFT_BLOCK_DEFAULT_WIDGETS,
-  CENTER_BLOCK_DEFAULT_WIDGETS,
   RIGHT_BLOCK_DEFAULT_WIDGETS,
+  CENTER_BLOCK_DEFAULT_WIDGETS,
 } from '@/constants/widgetTypes';
 
 const Container = () => {

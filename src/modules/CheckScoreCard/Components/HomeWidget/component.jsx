@@ -22,10 +22,13 @@ class CheckScoreCardWidget extends React.PureComponent {
   }
 
   render() {
-    const { status, data } = this.props;
+    const {
+      status,
+      data,
+    } = this.props;
 
     return (
-      <div className="system-status-block">
+      <div className="check-score-card" style={{ backgroundColor: '#948d8d', overflow: 'hidden' }}>
         <div className="title">
           <p>{WIDGET_TITLE}</p>
         </div>

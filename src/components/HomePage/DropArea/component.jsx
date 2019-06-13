@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDrop } from 'react-dnd';
 import PropTypes from 'prop-types';
-import WidgetBlock from '@/components/WidgetBlock';
+import { DrugableWidgetBlock as WidgetBlock } from '@/components/WidgetBlock';
 
 const style = {
   height: '100%',
@@ -24,7 +24,7 @@ const DrugableBlock = (props) => {
     onDrop,
     accept,
     index,
-    // name,
+    name,
   } = props;
 
   const [{ canDrop, isOver }, drop] = useDrop({
@@ -46,7 +46,7 @@ const DrugableBlock = (props) => {
   }
 
   return (
-    <div ref={drop} style={Object.assign({}, style, { backgroundColor })}>
+    <div ref={drop} style={Object.assign({}, style, { backgroundColor, width: name === 'center' ? '60%' : style.width })}>
       {items.map(item => (
         <WidgetBlock key={item} type={item} index={index} />
       ))}
@@ -59,7 +59,7 @@ DrugableBlock.propTypes = {
   onDrop: PropTypes.func,
   accept: PropTypes.arrayOf(PropTypes.string),
   index: PropTypes.number,
-  // name: PropTypes.string,
+  name: PropTypes.string,
 };
 
 DrugableBlock.defaultProps = {
@@ -67,7 +67,7 @@ DrugableBlock.defaultProps = {
   accept: [],
   onDrop: () => {},
   index: 0,
-  // name: '',
+  name: '',
 };
 
 export default React.memo(DrugableBlock);
