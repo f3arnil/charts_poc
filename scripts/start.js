@@ -115,7 +115,7 @@ app.get('/api/govicurwes', (req, res) => {
     data.list.push({
       name: faker.finance.currencyCode(),
       data: fakeData(),
-      change: faker.random.number({ min: 3, max: 30 }),
+      // change: faker.random.number({ min: 3, max: 30 }),
     });
     data.change.push(faker.random.number({ min: 3, max: 30 }));
   }
@@ -193,7 +193,7 @@ app.get('/api/rsxbottomup', (req, res) => {
       value: faker.random.number({ min: 15, max: 90 })
     })
   }
-  res.send(JSON.stringify(data))
+  res.send(JSON.stringify({ values: data }))
 });
 
 app.get('/api/scheduling', (req, res) => {
@@ -216,10 +216,9 @@ app.get('/api/sqdatenbaum', (req, res) => {
     data.push({
       title: faker.company.companyName(),
       value: faker.random.number({ min: 15, max: 90 }),
-      treeData: []
     })
   }
-  res.send(JSON.stringify(data))
+  res.send(JSON.stringify({ values: data, treeData: [] }))
 });
 
 app.get('/api/swapcurwes', (req, res) => {
@@ -243,7 +242,7 @@ app.get('/api/swapcurwes', (req, res) => {
     data.list.push({
       name: faker.finance.currencyCode(),
       data: fakeData(),
-      change: faker.random.number({ min: 3, max: 30 }),
+      // change: faker.random.number({ min: 3, max: 30 }),
     });
     data.change.push(faker.random.number({ min: 3, max: 30 }));
   }
@@ -270,10 +269,9 @@ app.get('/api/txdatenbaum', (req, res) => {
     data.push({
       title: faker.company.companyName(),
       value: faker.random.number({ min: 15, max: 90 }),
-      treeData: []
     })
   }
-  res.send(JSON.stringify(data))
+  res.send(JSON.stringify({ values: data, treeData: [] }))
 });
 
 checkBrowsers(paths.appPath, isInteractive)

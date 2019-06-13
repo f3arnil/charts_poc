@@ -49,7 +49,7 @@ SQDatenBaumWidget.propTypes = {
   getData: PropTypes.func,
   clearData: PropTypes.func,
   status: PropTypes.string,
-  values: PropTypes.arrayOf(PropTypes.number),
+  values: PropTypes.arrayOf(PropTypes.object),
   tree: PropTypes.arrayOf(PropTypes.number),
 };
 

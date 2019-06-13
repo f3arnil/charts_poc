@@ -15,7 +15,7 @@ export const requestKurs = () => ({
 
 export const responseKurs = data => ({
   type: KURS.SUCCESS,
-  payload: { data },
+  payload: data,
 });
 
 export const errorKurs = () => ({
@@ -42,7 +42,7 @@ export const reducer = handleActions(
       ...state,
       status: STATUSES.PENDING,
     }),
-    [KURS.SUCCESS]: (state, { payload: { data } }) => {
+    [KURS.SUCCESS]: (state, { payload: data }) => {
       return ({
         ...state,
         status: STATUSES.IDLE,

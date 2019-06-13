@@ -15,7 +15,7 @@ export const requestRSXBottomUp = () => ({
 
 export const responseRSXBottomUp = data => ({
   type: RSX_BOTTOM_UP.SUCCESS,
-  payload: { data },
+  payload: data,
 });
 
 export const errorRSXBottomUp = () => ({
@@ -42,7 +42,7 @@ export const reducer = handleActions(
       ...state,
       status: STATUSES.PENDING,
     }),
-    [RSX_BOTTOM_UP.SUCCESS]: (state, { payload: { data } }) => {
+    [RSX_BOTTOM_UP.SUCCESS]: (state, { payload: data }) => {
       return ({
         ...state,
         status: STATUSES.IDLE,

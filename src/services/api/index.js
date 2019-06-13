@@ -4,6 +4,7 @@ import * as API_URLS from './constants';
 export const fetchCheckScoreCard = async () => {
   const response = await get({ url: API_URLS.CHECK_SCORE_CARD_URL });
   // [TODO] Dont forget to check response status
+
   return response.data;
 };
 

@@ -15,7 +15,7 @@ export const requestSQDatenBaum = () => ({
 
 export const responseSQDatenBaum = data => ({
   type: SQ_DATEN_BAUM.SUCCESS,
-  payload: { data },
+  payload: data,
 });
 
 export const errorSQDatenBaum = () => ({
@@ -42,7 +42,7 @@ export const reducer = handleActions(
       ...state,
       status: STATUSES.PENDING,
     }),
-    [SQ_DATEN_BAUM.SUCCESS]: (state, { payload: { data } }) => {
+    [SQ_DATEN_BAUM.SUCCESS]: (state, { payload: data }) => {
       return ({
         ...state,
         status: STATUSES.IDLE,

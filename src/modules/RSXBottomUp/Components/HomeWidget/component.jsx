@@ -47,7 +47,7 @@ RSXBottomUpWidget.propTypes = {
   getData: PropTypes.func,
   clearData: PropTypes.func,
   status: PropTypes.string,
-  values: PropTypes.arrayOf(PropTypes.number),
+  values: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default RSXBottomUpWidget;

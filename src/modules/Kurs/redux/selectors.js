@@ -14,10 +14,20 @@ export const getKursData = createSelector(
 
 export const getKurs = createSelector(
   getKursData,
-  data => get(data, 'kurs', []),
+  data => get(data, 'kurs.data', []),
 );
 
 export const getAllocations = createSelector(
   getKursData,
-  data => get(data, 'allocations', []),
+  data => get(data, 'allocations.data', []),
+);
+
+export const getKursTitile = createSelector(
+  getKursData,
+  data => get(data, 'kurs.title', []),
+);
+
+export const getAllocationsTitle = createSelector(
+  getKursData,
+  data => get(data, 'allocations.title', []),
 );

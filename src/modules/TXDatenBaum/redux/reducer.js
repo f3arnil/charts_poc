@@ -15,7 +15,7 @@ export const requestTXDatenBaum = () => ({
 
 export const responseTXDatenBaum = data => ({
   type: TX_DATEN_BAUM.SUCCESS,
-  payload: { data },
+  payload: data,
 });
 
 export const errorTXDatenBaum = () => ({
@@ -42,7 +42,7 @@ export const reducer = handleActions(
       ...state,
       status: STATUSES.PENDING,
     }),
-    [TX_DATEN_BAUM.SUCCESS]: (state, { payload: { data } }) => {
+    [TX_DATEN_BAUM.SUCCESS]: (state, { payload: data }) => {
       return ({
         ...state,
         status: STATUSES.IDLE,
