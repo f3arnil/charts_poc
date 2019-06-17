@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
+import cn from 'classnames';
 
 import { STATUSES } from '@/constants/redux';
-
-const WIDGET_TITLE = 'System status';
+import { getFormatedDate } from '@/helpers/formaters';
 
 class SystemStatusWidget extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.renderEvents = this.renderEvents.bind(this);
+  }
+
   componentDidMount() {
     const { status, getData } = this.props;
 
@@ -15,16 +21,33 @@ class SystemStatusWidget extends React.PureComponent {
     }
   }
 
-  render() {
-    const { status, events } = this.props;
+  renderEvents() {
+    const { events } = this.props;
+    const eventsForRender = events.slice(0, 2);
 
-    return (
-      <div className="system-status-block">
-        <div className="title">
-          <p>{WIDGET_TITLE}</p>
+    return eventsForRender.map((event, index) => {
+      const isFirst = index === 0;
+      const className = cn({
+        event: true,
+        first: isFirst,
+      });
+      return (
+        <div className={className} key={event.date}>
+          <h3 className="date">
+            {getFormatedDate(event.date)}
+          </h3>
+          <p className="description">
+            {event.description}
+          </p>
         </div>
-        <p>{ `${WIDGET_TITLE} state is: ${status}.` }</p>
-        <p>{ `Events length is: ${events.length}.` }</p>
+      );
+    });
+  }
+
+  render() {
+    return (
+      <div className="widget system-status-block">
+        {this.renderEvents()}
       </div>
     );
   }

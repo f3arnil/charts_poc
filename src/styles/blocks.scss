@@ -1,0 +1,274 @@
+.widget-block {
+  border-top: 1px solid $grey;
+  margin-right: 25px;
+  margin-top: 30px;
+
+  &--dark {
+    background: $woodsmoke;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 8px 0 24px;
+    
+    h4 {
+      cursor: move;
+      margin: 0;
+    }
+  }
+
+  .actions {
+    margin-right: 10px;
+  }
+}
+
+.drop-area-block {
+  height: 100%;
+  width: 20%;
+  color: $white;
+  font-size: 1rem;
+  line-height: normal;
+  float: left;
+  min-height: 300px;
+  overflow: hidden;
+}
+
+.charts-title {
+  display: flex;
+  align-items: center;
+
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    
+    h4 {
+      font-size: 40px;
+      font-weight: 100;
+      margin: 0;
+      margin-left: 10px;
+    }
+  }
+
+  .charts {
+    display: flex;
+    align-items: center;
+
+    .chart {
+      display: flex;
+      align-items: center;
+      margin-right: 10px;
+
+      .label {
+        font-family: Fira Sans;
+        margin-left: 5px;
+      }
+
+      div {
+        height: 30px;
+        width: 30px;
+      }
+    }
+  }
+}
+
+.described-pie-chart {
+  width: 100%;
+  &:first-child {
+    margin-right: 15px;
+  }
+
+  h2 {
+    font-weight: 100;
+    text-align: center;
+    margin: 10px 0 20px;
+  }
+
+  .pie-chart {
+    width: 115px;
+    height: 115px;
+    margin: 0 auto;
+  }
+
+  .chart-description {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    font-family: Fira Sans;
+    font-style: normal;
+    font-size: 15px;
+    line-height: 18px;
+
+    .value-description {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &::before {
+        content: '';
+        position: absolute;
+        background: $outer-space;
+        top: 5px;
+        left: -5px;
+        width: 1px;
+        height: 24px;
+      }
+      &.first {
+        &::before {
+          display: none;
+        }
+      }
+      .value {
+        font-weight: bold;
+      }
+      .name {
+        font-size: 12px;
+        line-height: 14px;
+      }
+    }
+  }
+}
+
+table.table {
+  width: 100%;
+  font-family: Fira Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  border-collapse: collapse;
+  color: #FFFFFFCC;
+
+  tr {
+    padding-top: 5px;
+    border-bottom: 1px solid #FFFFFF33;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .small-text {
+      font-size: 11px;
+    }
+  }
+}
+
+.doted-chart {
+  &.titled {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title {
+    font-family: PT Serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    color: #FFFFFF;
+    opacity: 0.8;
+  }
+
+  .dots {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .names-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-top: 1px solid rgba(99, 102, 107, 0.5);
+    .name {
+      margin-top: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      font-family: Fira Sans;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 13px;
+      line-height: 16px;
+      color: #FFFFFF;
+      opacity: 0.5;
+    }
+  }
+
+  .dot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 26px;
+    color: #FFFFFF;
+    width: 50px;
+    margin-top: 5px;
+
+    .circle {
+      display: block;
+      background: $aquamarine-blue;
+      border-radius: 50%;
+
+      &.dark {
+        background: $dark-dot-background;
+      }
+    }
+    .value {
+      opacity: 0.8;
+    }
+  }
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.plan-block {
+  display: flex;
+
+  .icon {
+    margin-right: 10px;
+  }
+
+  .plan-description {
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: normal;
+    color: #FFFFFF;
+    .title {
+      font-size: 16px;
+      line-height: 19px;
+      color: #FFFFFF;
+    }
+    .description {
+      font-size: 14px;
+      line-height: 17px;
+      opacity: 0.5;
+    }
+  }
+}

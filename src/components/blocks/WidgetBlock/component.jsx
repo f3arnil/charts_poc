@@ -18,7 +18,7 @@ const WidgetBlock = (props) => {
   switch (type) {
     case WIDGET_TYPES.SYSTEM_STATUS:
       return <SystemStatusWidget />;
-    case WIDGET_TYPES.SWAP_CURWES:
+    case WIDGET_TYPES.SWAP_CURVES:
       return <SwapCurwesWidget />;
     case WIDGET_TYPES.SQ_DATENBAUM:
       return <SQDatenBaumWidget />;
@@ -32,7 +32,7 @@ const WidgetBlock = (props) => {
       return <KursWidget />;
     case WIDGET_TYPES.GRUPPE:
       return <GruppeWidget />;
-    case WIDGET_TYPES.GOVI_CURWES:
+    case WIDGET_TYPES.GOVI_CURVES:
       return <GoviCurwesWidget />;
     case WIDGET_TYPES.CHECK_SCORE_CARD:
       return <CheckScoreCardWidget />;

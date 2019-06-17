@@ -47,7 +47,7 @@ const Container = () => {
 
   const findCard = (type) => {
     const card = cards.filter(c => `${c.type}` === type)[0];
-    console.warn(card);
+    // console.warn(card);
     return {
       card,
       index: cards.indexOf(card),
@@ -64,7 +64,7 @@ const Container = () => {
   };
 
   const [, drop] = useDrop({ accept: ItemTypes.CARD });
-  console.warn(cards);
+  // console.warn(cards);
   return (
     <>
       <div ref={drop} style={style}>

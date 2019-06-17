@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { get } from 'lodash';
+import get from 'lodash/get';
 import { getKursData as getStoreKurs } from '@/reducer/index';
 
 export const getKursState = createSelector(

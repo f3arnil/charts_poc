@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { get } from 'lodash';
+import get from 'lodash/get';
 import { getGruppeData as getGruppe } from '@/reducer/index';
 
 export const getGruppeState = createSelector(

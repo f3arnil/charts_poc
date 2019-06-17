@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
+import concat from 'lodash/concat';
 
 import { STATUSES } from '@/constants/redux';
+import Table from '@/components/blocks/Table';
+import DotedChart from '@/components/blocks/DotedChart';
 
-const WIDGET_TITLE = 'Swap Curwes';
+import headerConfig from './tableConfig';
 
 class SwapCurwesWidget extends React.PureComponent {
   componentDidMount() {
@@ -15,17 +18,40 @@ class SwapCurwesWidget extends React.PureComponent {
     }
   }
 
-  render() {
-    const { status, list, change } = this.props;
+  getDataForTable() {
+    const { list, change } = this.props;
 
+    const dataArray = concat([], list, [{
+      name: <span className="small-text">Change in BP</span>,
+      data: change,
+    }]);
+
+    const dataArrayForRedner = dataArray
+      .map((row, index) => ({
+        ...row,
+        data: (
+          <DotedChart
+            withoutDots={index === dataArray.length - 1}
+            data={row.data}
+          />),
+      }));
+
+    return dataArrayForRedner;
+  }
+
+  render() {
+    const { status } = this.props;
+
+    if (status !== STATUSES.IDLE) {
+      return ('Loading...');
+    }
     return (
       <div className="system-status-block">
-        <div className="title">
-          <p>{WIDGET_TITLE}</p>
-        </div>
-        <p>{ `${WIDGET_TITLE} status state is: ${status}.` }</p>
-        <p>{ `Data list is: ${JSON.stringify(list)}.` }</p>
-        <p>{ `Data change is: ${JSON.stringify(change)}.` }</p>
+        <Table
+          showHeader={false}
+          data={this.getDataForTable()}
+          header={headerConfig}
+        />
       </div>
     );
   }

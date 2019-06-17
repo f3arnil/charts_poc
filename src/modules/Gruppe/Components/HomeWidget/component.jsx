@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
 
 import { STATUSES } from '@/constants/redux';
-
-const WIDGET_TITLE = 'Gruppe wahrung & Allocations factor';
+import DescribedPieChart from '@/components/blocks/DescribedPieChart';
 
 class GruppeWidget extends React.PureComponent {
   componentDidMount() {
@@ -16,15 +15,16 @@ class GruppeWidget extends React.PureComponent {
   }
 
   render() {
-    const { status, data } = this.props;
+    const { data } = this.props;
 
     return (
-      <div className="system-status-block">
-        <div className="title">
-          <p>{WIDGET_TITLE}</p>
-        </div>
-        <p>{ `${WIDGET_TITLE} status state is: ${status}.` }</p>
-        <p>{ `Data list is: ${JSON.stringify(data)}.` }</p>
+      <div className="gruppe-block">
+        {data.map((chart, index) => {
+          const key = `described-pie-chart--${index}`;
+          return (
+            <DescribedPieChart key={key} {...chart} />
+          );
+        })}
       </div>
     );
   }

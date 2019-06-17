@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { get } from 'lodash';
+import get from 'lodash/get';
 import { getGoviCurwesData as getGoviCurwes } from '@/reducer/index';
 
 export const getGoviCurwesState = createSelector(

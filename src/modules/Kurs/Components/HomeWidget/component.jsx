@@ -1,11 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
 
 import { STATUSES } from '@/constants/redux';
-// title: 'Kurs wahrung',
-// title: 'Allocations factor',
-const WIDGET_TITLE = 'Kurs wahrung & Allocations factor';
+import DotedChart from '@/components/blocks/DotedChart';
 
 class KursWidget extends React.PureComponent {
   componentDidMount() {
@@ -17,16 +15,20 @@ class KursWidget extends React.PureComponent {
   }
 
   render() {
-    const { status, kurs, allocations } = this.props;
+    const { kurs, allocations } = this.props;
 
     return (
-      <div className="system-status-block">
-        <div className="title">
-          <p>{WIDGET_TITLE}</p>
-        </div>
-        <p>{ `${WIDGET_TITLE} status state is: ${status}.` }</p>
-        <p>{ `Kurs list is: ${JSON.stringify(kurs)}.` }</p>
-        <p>{ `Allocations list is: ${JSON.stringify(allocations)}.` }</p>
+      <div className="kurs-allokationsfaktor-block">
+        <DotedChart
+          title="KURS-WÄHRUNG"
+          data={kurs}
+          dotsWithName
+        />
+        <DotedChart
+          title="ALLOKATIONSFAKTOR"
+          data={allocations}
+          dotsWithName
+        />
       </div>
     );
   }

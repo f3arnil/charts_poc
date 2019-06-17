@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { get } from 'lodash';
+import get from 'lodash/get';
 import { getSchedulingData as getScheduling } from '@/reducer/index';
 
 export const getSchedulingDataState = createSelector(

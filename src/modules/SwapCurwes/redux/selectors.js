@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { get } from 'lodash';
+import get from 'lodash/get';
 import { getSwapCurwesData as getSwapCurwes } from '@/reducer/index';
 
 export const getSwapCurwesState = createSelector(

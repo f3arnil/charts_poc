@@ -1,0 +1,35 @@
+.widget {
+  font-family: PT Serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+.system-status-block {
+  .event {
+    padding: 15px 0;
+    border-top: 1px solid $grey;
+    h3, p {
+      margin: 0;
+    }
+
+    .description {
+      opacity: 0.8;
+    }
+
+    &.first {
+      border: none;
+      padding-top: 0;
+      .date {
+        font-size: 48px;
+      }
+    }
+  }
+}
+
+.gruppe-block {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+}

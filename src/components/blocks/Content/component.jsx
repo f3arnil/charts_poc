@@ -1,7 +1,8 @@
 import React from 'react';
 
-import DropArea from '@/components/HomePage/DropArea';
+import DropArea from '@/components/blocks/DropArea';
 import {
+  WIDGET_TITLES,
   LEFT_BLOCK_DEFAULT_WIDGETS,
   RIGHT_BLOCK_DEFAULT_WIDGETS,
   CENTER_TOP_DEFAULT_WIDGETS,
@@ -10,7 +11,8 @@ import {
 
 const blocks = {
   left: [{
-    items: LEFT_BLOCK_DEFAULT_WIDGETS.map(item => ({ type: item })),
+    items: LEFT_BLOCK_DEFAULT_WIDGETS
+      .map(item => ({ type: item, title: WIDGET_TITLES[item] })),
     accepts: [
       ...LEFT_BLOCK_DEFAULT_WIDGETS,
       ...CENTER_TOP_DEFAULT_WIDGETS,
@@ -19,7 +21,8 @@ const blocks = {
   }],
   center: [
     {
-      items: CENTER_TOP_DEFAULT_WIDGETS.map(item => ({ type: item })),
+      items: CENTER_TOP_DEFAULT_WIDGETS
+        .map(item => ({ type: item, title: WIDGET_TITLES[item] })),
       accepts: [
         ...LEFT_BLOCK_DEFAULT_WIDGETS,
         ...CENTER_TOP_DEFAULT_WIDGETS,
@@ -27,7 +30,8 @@ const blocks = {
       ],
     },
     {
-      items: CENTER_BOTTOM_DEFAULT_WIDGETS.map(item => ({ type: item })),
+      items: CENTER_BOTTOM_DEFAULT_WIDGETS
+        .map(item => ({ type: item, title: WIDGET_TITLES[item] })),
       accepts: [
         ...LEFT_BLOCK_DEFAULT_WIDGETS,
         ...CENTER_TOP_DEFAULT_WIDGETS,
@@ -37,7 +41,8 @@ const blocks = {
     },
   ],
   right: [{
-    items: RIGHT_BLOCK_DEFAULT_WIDGETS.map(item => ({ type: item })),
+    items: RIGHT_BLOCK_DEFAULT_WIDGETS
+      .map(item => ({ type: item, title: WIDGET_TITLES[item] })),
     accepts: [
       ...LEFT_BLOCK_DEFAULT_WIDGETS,
       ...CENTER_TOP_DEFAULT_WIDGETS,

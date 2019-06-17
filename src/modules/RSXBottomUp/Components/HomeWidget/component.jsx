@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
 
 import { STATUSES } from '@/constants/redux';
+import {
+  CHART_COLORS_BY_INDEX,
+  CHART_CLASSES_BY_INDEX,
+} from '@/constants/charts';
+import ChartsTitle from '@/components/blocks/ChartsTitle';
+import gridIcon from '@/assets/icons/grid.svg';
 
-const WIDGET_TITLE = 'RSX Bottom Up';
+const WIDGET_TITLE = 'RSX';
 
 class RSXBottomUpWidget extends React.PureComponent {
   componentDidMount() {
@@ -15,16 +21,29 @@ class RSXBottomUpWidget extends React.PureComponent {
     }
   }
 
-  render() {
-    const { status, values } = this.props;
+  getChartTitleData() {
+    const { values } = this.props;
 
+    return values.map((value, index) => ({
+      values: [{
+        ...value,
+        color: CHART_COLORS_BY_INDEX[index],
+      }],
+      label: value.value,
+      className: CHART_CLASSES_BY_INDEX[index],
+    }));
+  }
+
+  render() {
     return (
       <div className="system-status-block">
-        <div className="title">
-          <p>{WIDGET_TITLE}</p>
-        </div>
-        <p>{ `${WIDGET_TITLE} status state is: ${status}.` }</p>
-        <p>{ `Data values is: ${JSON.stringify(values)}.` }</p>
+        <ChartsTitle
+          className="text__red"
+          iconClassName="bg__red"
+          icon={gridIcon}
+          title={WIDGET_TITLE}
+          charts={this.getChartTitleData()}
+        />
       </div>
     );
   }

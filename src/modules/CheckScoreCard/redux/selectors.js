@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { get } from 'lodash';
+import get from 'lodash/get';
 import { getCheckScoreCardData as getCheckScoreCard } from '@/reducer/index';
 
 export const getCheckScoreCardDataState = createSelector(

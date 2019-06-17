@@ -7,6 +7,8 @@ import { Provider } from 'react-redux';
 import Router from '@/routes/Router';
 import store from './store';
 
+import '@/styles/style.scss';
+
 ReactDOM.render(
   (
     <Provider store={store}>

@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { get } from 'lodash';
+import get from 'lodash/get';
 import { getRSXBottomUpData as getRSXBottomUp } from '@/reducer';
 
 export const getRSXBottomUpState = createSelector(

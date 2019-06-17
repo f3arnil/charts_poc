@@ -1,0 +1,2 @@
+export const DATE_FORMAT = 'DD.MM.YYYY';
+export const DATE_WITH_MONTH_NAME_FORMAT = 'DD MMM YYYY';

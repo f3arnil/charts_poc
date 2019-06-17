@@ -1,19 +1,14 @@
 import React from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
 import PropTypes from 'prop-types';
 
 import WidgetBlock from './component';
+import spreadIcon from '@/assets/icons/spread.svg';
 
-const style = {
-  border: '1px dashed gray',
-  backgroundColor: 'white',
-  padding: '0.5rem 1rem',
-  float: 'left',
-};
-
-const DrugableWidgetBlock = ({
+const DragableWidgetBlock = ({
   type,
+  title,
   accept,
   findWidget,
   moveWidget,
@@ -80,18 +75,25 @@ const DrugableWidgetBlock = ({
 
   return (
     <div
+      className="widget-block"
       ref={preview}
-      style={Object.assign({}, style, { opacity })}
+      style={Object.assign({}, { opacity })}
     >
-      <h4 style={{ cursor: 'move' }} ref={node => drag(drop(node))}>TITLE</h4>
+      <div className="widget-block__header">
+        <h4 ref={node => drag(drop(node))}>{title}</h4>
+        <span className="actions">
+          <img alt="Actions" src={spreadIcon} />
+        </span>
+      </div>
       {/* This ref ^ could be passed inside container */}
       <WidgetBlock type={type} onRemove={removeWidget} />
     </div>
   );
 };
 
-DrugableWidgetBlock.propTypes = {
+DragableWidgetBlock.propTypes = {
   type: PropTypes.string,
+  title: PropTypes.string,
   accept: PropTypes.arrayOf(PropTypes.string),
   blockName: PropTypes.string,
   findWidget: PropTypes.func,
@@ -99,8 +101,9 @@ DrugableWidgetBlock.propTypes = {
   removeWidget: PropTypes.func,
 };
 
-DrugableWidgetBlock.defaultProps = {
+DragableWidgetBlock.defaultProps = {
   type: '',
+  title: 'TITLE',
   accept: [],
   blockName: '',
   findWidget: noop,
@@ -108,4 +111,4 @@ DrugableWidgetBlock.defaultProps = {
   removeWidget: noop,
 };
 
-export default React.memo(DrugableWidgetBlock);
+export default React.memo(DragableWidgetBlock);

@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { get } from 'lodash';
+import get from 'lodash/get';
 import { getSystemStatusData } from '@/reducer/index';
 
 export const getSystemStatusState = createSelector(

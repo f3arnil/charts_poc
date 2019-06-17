@@ -329,6 +329,10 @@ module.exports = {
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
+          {
+            test: /\.svg$/,
+            loader: 'svg-inline-loader'
+          },
         ],
       },
       // ** STOP ** Are you adding a new loader?

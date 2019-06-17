@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useDrag, useDrop } from 'react-dnd';
 import ItemTypes from './ItemTypes';
-import { WidgetBlock } from '@/components/WidgetBlock';
+import { WidgetBlock } from '@/components/blocks/WidgetBlock';
 
 const style = {
   border: '1px dashed gray',

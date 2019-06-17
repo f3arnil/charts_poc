@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { get } from 'lodash';
+import get from 'lodash/get';
 import { createSelector } from 'reselect';
 
 import { reducer as systemStatusReducer } from '@/modules/SystemStatus/redux/reducer';

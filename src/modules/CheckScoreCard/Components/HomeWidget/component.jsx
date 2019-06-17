@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { noop } from 'lodash';
+import noop from 'lodash/noop';
 
 import { STATUSES } from '@/constants/redux';
+import { getFormatedDate } from '@/helpers/formaters';
+import Table from '@/components/blocks/Table';
+import StatusDot from '@/components/blocks/StatusDot';
 
-const WIDGET_TITLE = 'Check score card';
+import headerConfig from './tableConfig';
 
 class CheckScoreCardWidget extends React.PureComponent {
   componentDidMount() {
@@ -15,19 +18,31 @@ class CheckScoreCardWidget extends React.PureComponent {
     }
   }
 
-  render() {
-    const {
-      status,
-      data,
-    } = this.props;
+  getDataForTable() {
+    const { data } = this.props;
 
+    const dataArrayForRedner = data
+      .map(row => ({
+        ...row,
+        status: <StatusDot color={row.status} />,
+        date: getFormatedDate(row.date),
+      }));
+
+    return dataArrayForRedner;
+  }
+
+  render() {
+    const { status } = this.props;
+
+    if (status !== STATUSES.IDLE) {
+      return ('Loading...');
+    }
     return (
-      <div className="check-score-card" style={{ backgroundColor: '#948d8d', overflow: 'hidden' }}>
-        <div className="title">
-          <p>{WIDGET_TITLE}</p>
-        </div>
-        <p>{ `${WIDGET_TITLE} state is: ${status}.` }</p>
-        <p>{ `Events length is: ${data.length}.` }</p>
+      <div className="system-status-block">
+        <Table
+          data={this.getDataForTable()}
+          header={headerConfig}
+        />
       </div>
     );
   }
