@@ -197,9 +197,6 @@ class AddRemoveLayout extends React.PureComponent {
       iZtems: itemsListS,
       newCounter: 0
     };
-
-    this.onAddItem = this.onAddItem.bind(this);
-    this.onBreakpointChange = this.onBreakpointChange.bind(this);
   }
 
   createElement(el) {
@@ -227,7 +224,7 @@ class AddRemoveLayout extends React.PureComponent {
     );
   }
 
-  onAddItem() {
+  onAddItem = () => {
     /*eslint no-console: 0*/
     console.log("adding", "n" + this.state.newCounter);
     this.setState({
@@ -245,7 +242,7 @@ class AddRemoveLayout extends React.PureComponent {
   }
 
   // We're using the cols coming back from this to calculate where to add new items.
-  onBreakpointChange(breakpoint, cols) {
+  onBreakpointChange = (breakpoint, cols) => {
     console.error(breakpoint, cols)
     this.setState({
       breakpoint: breakpoint,

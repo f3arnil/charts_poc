@@ -7,12 +7,6 @@ import { STATUSES } from '@/constants/redux';
 import { getFormatedDate } from '@/helpers/formaters';
 
 class SystemStatusWidget extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.renderEvents = this.renderEvents.bind(this);
-  }
-
   componentDidMount() {
     const { status, getData } = this.props;
 
@@ -21,7 +15,7 @@ class SystemStatusWidget extends React.PureComponent {
     }
   }
 
-  renderEvents() {
+  renderEvents = () => {
     const { events } = this.props;
     const eventsForRender = events.slice(0, 2);
 

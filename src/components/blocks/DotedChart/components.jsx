@@ -4,14 +4,6 @@ import cn from 'classnames';
 import isObject from 'lodash/isObject';
 
 class DotedChart extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.renderDotElement = this.renderDotElement.bind(this);
-    this.renderDotFromNumber = this.renderDotFromNumber.bind(this);
-    this.renderDotFromObject = this.renderDotFromObject.bind(this);
-  }
-
   static getDotSizes(value) {
     const size = Math.abs(value) * 6;
     return {
@@ -20,65 +12,68 @@ class DotedChart extends React.PureComponent {
     };
   }
 
-  renderDotFromNumber(value) {
-    const { withoutDots } = this.props;
-    const isPositive = value > 0;
-    const circleClassNameCN = cn('circle', {
-      dark: !isPositive,
-    });
-    return (
-      <div className="dot">
-        {!withoutDots && (
-          <span
-            className={circleClassNameCN}
-            style={DotedChart.getDotSizes(value)}
-          />
-        )}
-        <span className="value">
-          {value}
-        </span>
-      </div>
-    );
-  }
-
-  renderDotFromObject(data) {
-    const { value } = data;
-    const { withoutDots } = this.props;
-    const isPositive = value > 0;
-    const circleClassNameCN = cn('circle', {
-      dark: !isPositive,
-    });
-    return (
-      <div className="dot">
-        {!withoutDots && (
-          <span
-            className={circleClassNameCN}
-            style={DotedChart.getDotSizes(value)}
-          />
-        )}
-        <span className="value">
-          {value}
-        </span>
-      </div>
-    );
-  }
-
   static renderName(value) {
     const { name } = value;
+    const key = `name__${name}--${value.value}`;
 
     return (
-      <span className="name">
+      <span key={key} className="name">
         {name}
       </span>
     );
   }
 
-  renderDotElement(value) {
+  renderDotFromNumber = (value, index) => {
+    const { withoutDots } = this.props;
+    const isPositive = value > 0;
+    const key = `number-dot__${value}--${index}`;
+    const circleClassNameCN = cn('circle', {
+      dark: !isPositive,
+    });
+    return (
+      <div key={key} className="dot">
+        {!withoutDots && (
+          <span
+            className={circleClassNameCN}
+            style={DotedChart.getDotSizes(value)}
+          />
+        )}
+        <span className="value">
+          {value}
+        </span>
+      </div>
+    );
+  }
+
+  renderDotFromObject = (data) => {
+    const { value } = data;
+    const { withoutDots } = this.props;
+    const isPositive = value > 0;
+    const key = `dot__${value}--${data.name}`;
+    const circleClassNameCN = cn('circle', {
+      dark: !isPositive,
+    });
+    return (
+      <div key={key} className="dot">
+        {!withoutDots && (
+          <span
+            className={circleClassNameCN}
+            style={DotedChart.getDotSizes(value)}
+          />
+        )}
+        <span className="value">
+          {value}
+        </span>
+      </div>
+    );
+  }
+
+  renderDotElement = (value, index) => {
     if (isObject(value)) {
-      return this.renderDotFromObject(value);
+      return this.renderDotFromObject(value, index);
     }
 
-    return this.renderDotFromNumber(value);
+    return this.renderDotFromNumber(value, index);
   }
 
   render() {
@@ -105,7 +100,10 @@ class DotedChart extends React.PureComponent {
 }
 
 DotedChart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.number,
+  ])),
   withoutDots: PropTypes.bool,
   dotsWithName: PropTypes.bool,
   title: PropTypes.string,

@@ -10,21 +10,19 @@ const DEFAULT_CHART_PROPS = {
   background: '#454545',
 };
 
-class PieChart extends React.PureComponent {
-  render() {
-    const { data, chartProps } = this.props;
-    const assignedChartProps = {
-      ...DEFAULT_CHART_PROPS,
-      ...chartProps,
-    };
-    return (
-      <ReactMinimalPieChart
-        data={data}
-        {...assignedChartProps}
-      />
-    );
-  }
-}
+const PieChart = (props) => {
+  const { data, chartProps } = props;
+  const assignedChartProps = {
+    ...DEFAULT_CHART_PROPS,
+    ...chartProps,
+  };
+  return (
+    <ReactMinimalPieChart
+      data={data}
+      {...assignedChartProps}
+    />
+  );
+};
 
 PieChart.defaultProps = {
   data: [],
@@ -33,4 +31,4 @@ PieChart.defaultProps = {
   },
 };
 
-export default PieChart;
+export default React.memo(PieChart);

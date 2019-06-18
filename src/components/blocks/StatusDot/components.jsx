@@ -16,4 +16,4 @@ StatusDot.propTypes = {
   color: PropTypes.string.isRequired,
 };
 
-export default StatusDot;
+export default React.memo(StatusDot);

@@ -77,7 +77,7 @@ const DragableWidgetBlock = ({
     <div
       className="widget-block"
       ref={preview}
-      style={Object.assign({}, { opacity })}
+      style={{ opacity }}
     >
       <div className="widget-block__header">
         <h4 ref={node => drag(drop(node))}>{title}</h4>

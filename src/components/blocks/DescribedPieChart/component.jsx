@@ -13,12 +13,17 @@ class DescribedPieChart extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.getDataForPieChart = this.getDataForPieChart.bind(this);
-    this.getAllValueSumm = this.getAllValueSumm.bind(this);
-    this.renderChartDescription = this.renderChartDescription.bind(this);
+    this.state = {
+      chartProps: {
+        className: 'pie-chart',
+        totalValue: this.getAllValueSumm(),
+        lineWidth: 40,
+      },
+      data: this.getDataForPieChart(),
+    };
   }
 
-  getDataForPieChart() {
+  getDataForPieChart = () => {
     const { data } = this.props;
 
     return data.map((row, index) => ({
@@ -27,13 +32,13 @@ class DescribedPieChart extends React.PureComponent {
     }));
   }
 
-  getAllValueSumm() {
+  getAllValueSumm = () => {
     const { data } = this.props;
 
     return data.reduce((acc, row) => acc + Math.abs(row.value), 0);
   }
 
-  renderChartDescription() {
+  renderChartDescription = () => {
     const { data } = this.props;
 
     return (
@@ -65,15 +70,12 @@ class DescribedPieChart extends React.PureComponent {
 
   render() {
     const { title } = this.props;
+    const { chartProps, data } = this.state;
     return (
       <div className="described-pie-chart">
         <PieChart
-          data={this.getDataForPieChart()}
-          chartProps={{
-            className: 'pie-chart',
-            totalValue: this.getAllValueSumm(),
-            lineWidth: 40,
-          }}
+          data={data}
+          chartProps={chartProps}
         />
         <h2>{title}</h2>
         {this.renderChartDescription()}

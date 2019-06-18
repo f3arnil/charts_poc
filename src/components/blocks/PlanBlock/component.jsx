@@ -24,4 +24,4 @@ PlanBlock.propTypes = {
   description: PropTypes.string.isRequired,
 };
 
-export default PlanBlock;
+export default React.memo(PlanBlock);

@@ -14,12 +14,6 @@ import treeImage from '@/assets/tree.jpg';
 const WIDGET_TITLE = 'TX';
 
 class TXDatenBaumWidget extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.getChartTitleData = this.getChartTitleData.bind(this);
-  }
-
   componentDidMount() {
     const { status, getData } = this.props;
 
@@ -28,7 +22,7 @@ class TXDatenBaumWidget extends React.PureComponent {
     }
   }
 
-  getChartTitleData() {
+  getChartTitleData = () => {
     const { values } = this.props;
 
     return values.map((value, index) => ({

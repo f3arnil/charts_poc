@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
-import concat from 'lodash/concat';
 
 import { STATUSES } from '@/constants/redux';
 import Table from '@/components/blocks/Table';
@@ -10,12 +9,6 @@ import DotedChart from '@/components/blocks/DotedChart';
 import headerConfig from './tableConfig';
 
 class GoviCurwesWidget extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.getDataForTable = this.getDataForTable.bind(this);
-  }
-
   componentDidMount() {
     const { status, getData } = this.props;
 
@@ -24,13 +17,13 @@ class GoviCurwesWidget extends React.PureComponent {
     }
   }
 
-  getDataForTable() {
+  getDataForTable = () => {
     const { list, change } = this.props;
 
-    const dataArray = concat([], list, [{
+    const dataArray = [...list, {
       name: <span className="small-text">Change in BP</span>,
       data: change,
-    }]);
+    }];
 
     const dataArrayForRedner = dataArray
       .map((row, index) => ({

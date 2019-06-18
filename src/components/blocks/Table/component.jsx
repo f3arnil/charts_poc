@@ -2,14 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Table extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.renderTableHeader = this.renderTableHeader.bind(this);
-    this.renderTableBody = this.renderTableBody.bind(this);
-  }
-
-  renderTableHeader() {
+  renderTableHeader = () => {
     const { header } = this.props;
 
     return (
@@ -25,7 +18,7 @@ class Table extends React.PureComponent {
     );
   }
 
-  renderTableBody() {
+  renderTableBody = () => {
     const { data, header } = this.props;
 
     return (
