@@ -1,8 +1,38 @@
+.drop-areas-container {
+  overflow: hidden;
+  clear: both;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+
+  .drop-areas {
+    display: flex;
+    margin-right: 25px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &.left,
+    &.right {
+      flex: 1;
+    }
+
+    &.center {
+      flex: 3;
+    }
+  }
+}
+
 .widget-block {
+  width: 100%;
   border-top: 1px solid $grey;
   margin-right: 25px;
   margin-top: 30px;
 
+  &:last-child {
+    margin-right: 0;
+  }
   &--dark {
     background: $woodsmoke;
   }
@@ -26,7 +56,6 @@
 
 .drop-area-block {
   height: 100%;
-  width: 20%;
   color: $white;
   font-size: 1rem;
   line-height: normal;

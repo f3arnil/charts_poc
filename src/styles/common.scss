@@ -8,6 +8,16 @@ body {
   padding: 18px 34px;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
 .text {
   &__green {
     color: $green;

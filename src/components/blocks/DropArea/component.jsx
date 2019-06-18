@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useDrop } from 'react-dnd';
 import update from 'immutability-helper';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
+
 import { DragableWidgetBlock as WidgetBlock } from '@/components/blocks/WidgetBlock';
 
 const DragableBlock = (props) => {
@@ -9,6 +11,7 @@ const DragableBlock = (props) => {
     items,
     accept,
     name,
+    direction,
   } = props;
   const [widgets, setWidgets] = useState(items);
 
@@ -57,8 +60,9 @@ const DragableBlock = (props) => {
 
   const [, drop] = useDrop({ accept });
 
+  const dropAreaBlockCN = cn('drop-area-block', direction);
   return (
-    <div ref={drop} className="drop-area-block">
+    <div ref={drop} className={dropAreaBlockCN}>
       {widgets.map((item, index) => (
         <WidgetBlock
           key={item.type}
@@ -79,12 +83,14 @@ DragableBlock.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object),
   accept: PropTypes.arrayOf(PropTypes.string),
   name: PropTypes.string,
+  direction: PropTypes.string,
 };
 
 DragableBlock.defaultProps = {
   items: [],
   accept: [],
   name: '',
+  direction: '',
 };
 
 export default React.memo(DragableBlock);
