@@ -18,7 +18,7 @@ class GruppeWidget extends React.PureComponent {
     const { data } = this.props;
 
     return (
-      <div className="gruppe-block">
+      <div className="widget gruppe-widget">
         {data.map((chart, index) => {
           const key = `described-pie-chart--${index}`;
           return (

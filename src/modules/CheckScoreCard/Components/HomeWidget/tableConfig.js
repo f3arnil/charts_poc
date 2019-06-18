@@ -2,6 +2,7 @@ const header = [
   {
     field: 'name',
     title: 'Name',
+    width: 250,
   },
   {
     field: 'status',
@@ -34,10 +35,12 @@ const header = [
   {
     field: 'persentRot',
     title: '%Rot',
+    className: 'right-text',
   },
   {
     field: 'persentGelb',
     title: '%Gelb',
+    className: 'right-text',
   },
 ];
 

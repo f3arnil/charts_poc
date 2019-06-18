@@ -8,6 +8,7 @@
   .drop-areas {
     display: flex;
     margin-right: 25px;
+    min-width: 350px;
 
     &:last-child {
       margin-right: 0;
@@ -29,6 +30,11 @@
   border-top: 1px solid $grey;
   margin-right: 25px;
   margin-top: 30px;
+
+  &.dragging {
+    opacity: 0.4;
+    background: grey;
+  }
 
   &:last-child {
     margin-right: 0;
@@ -57,7 +63,6 @@
 .drop-area-block {
   height: 100%;
   color: $white;
-  font-size: 1rem;
   line-height: normal;
   float: left;
   min-height: 300px;
@@ -126,7 +131,7 @@
   h2 {
     font-weight: 100;
     text-align: center;
-    margin: 10px 0 20px;
+    margin: 20px 0;
   }
 
   .pie-chart {
@@ -177,23 +182,63 @@
 
 table.table {
   width: 100%;
-  font-family: Fira Sans;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
   border-collapse: collapse;
-  color: #FFFFFFCC;
 
-  tr {
-    padding-top: 5px;
-    border-bottom: 1px solid #FFFFFF33;
+  thead {
+    tr {
+      border-bottom: 1px solid #63666B;
 
-    &:last-child {
-      border-bottom: none;
+      th {
+        font-family: Fira Sans;
+        font-weight: 200;
+        font-size: 14px;
+        line-height: 17px;
+        color: #FFFFFF;
+        text-align: left;
+        padding-bottom: 20px;
+
+        &.right-text {
+          text-align: right;
+          padding-right: 10px;
+        }
+        &.light {
+          opacity: 0.5;
+        }
+      }
     }
+  }
 
-    .small-text {
-      font-size: 11px;
+  tbody {
+    tr {
+      max-height: 45px;
+      padding-top: 5px;
+      border-bottom: 1px solid #FFFFFF33;
+
+      &:first-child {
+        padding-top: 10px;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .small-text {
+        font-size: 11px;
+      }
+
+      td {
+        font-family: Fira Sans;
+        font-style: normal;
+        font-weight: 200;
+        font-size: 15px;
+        line-height: 30px;
+        padding-left: 10px;
+        color: #FFFFFF;
+
+        &.right-text {
+          text-align: right;
+        }
+      }
     }
   }
 }
@@ -202,16 +247,25 @@ table.table {
   &.titled {
     display: flex;
     flex-direction: column;
+
+    .dot {
+      line-height: 16px;
+    }
+
+    &:first-child {
+      margin-bottom: 20px;
+    }
   }
 
   .title {
     font-family: PT Serif;
     font-style: normal;
-    font-weight: normal;
+    font-weight: 200;
     font-size: 14px;
-    line-height: 18px;
+    line-height: 14px;
     color: #FFFFFF;
     opacity: 0.8;
+    margin: 0 0 8px 0;
   }
 
   .dots {
@@ -225,8 +279,10 @@ table.table {
     align-items: flex-end;
     justify-content: space-between;
     border-top: 1px solid rgba(99, 102, 107, 0.5);
+    margin-top: 1px;
+
     .name {
-      margin-top: 5px;
+      margin-top: 3px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -242,6 +298,14 @@ table.table {
     }
   }
 
+  .circle-wrapper {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .dot {
     display: flex;
     flex-direction: column;
@@ -251,10 +315,10 @@ table.table {
     font-style: normal;
     font-weight: normal;
     font-size: 13px;
-    line-height: 26px;
+    line-height: 13px;
     color: #FFFFFF;
     width: 50px;
-    margin-top: 5px;
+    margin-top: 2px;
 
     .circle {
       display: block;
@@ -289,6 +353,7 @@ table.table {
     font-style: normal;
     font-weight: normal;
     color: #FFFFFF;
+    margin: 12px 0;
     .title {
       font-size: 16px;
       line-height: 19px;

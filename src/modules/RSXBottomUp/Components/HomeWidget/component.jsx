@@ -36,7 +36,7 @@ class RSXBottomUpWidget extends React.PureComponent {
 
   render() {
     return (
-      <div className="system-status-block">
+      <div className="widget rsx-bottom-up-widget">
         <ChartsTitle
           className="text__red"
           iconClassName="bg__red"

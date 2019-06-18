@@ -18,7 +18,7 @@ class GoviCurwesWidget extends React.PureComponent {
   }
 
   getDataForTable = () => {
-    const { list, change } = this.props;
+    const { list, change, maxValue } = this.props;
 
     const dataArray = [...list, {
       name: <span className="small-text">Change in BP</span>,
@@ -30,6 +30,7 @@ class GoviCurwesWidget extends React.PureComponent {
         ...row,
         data: (
           <DotedChart
+            maxValue={maxValue}
             withoutDots={index === dataArray.length - 1}
             data={row.data}
           />),
@@ -61,6 +62,7 @@ GoviCurwesWidget.defaultProps = {
   status: STATUSES.NOT_REQUESTED,
   list: [],
   change: [],
+  maxValue: 0,
 };
 
 GoviCurwesWidget.propTypes = {
@@ -68,6 +70,7 @@ GoviCurwesWidget.propTypes = {
   status: PropTypes.string,
   list: PropTypes.arrayOf(PropTypes.object),
   change: PropTypes.arrayOf(PropTypes.number),
+  maxValue: PropTypes.number,
 };
 
 export default GoviCurwesWidget;

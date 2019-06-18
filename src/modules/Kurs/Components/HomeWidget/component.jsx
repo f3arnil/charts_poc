@@ -15,17 +15,25 @@ class KursWidget extends React.PureComponent {
   }
 
   render() {
-    const { kurs, allocations } = this.props;
+    const {
+      kurs,
+      maxValue,
+      allocations,
+      kursTitle,
+      allocationsTitle,
+    } = this.props;
 
     return (
-      <div className="kurs-allokationsfaktor-block">
+      <div className="widget kurs-allokationsfaktor-widget">
         <DotedChart
-          title="KURS-WÄHRUNG"
+          maxValue={maxValue}
+          title={kursTitle}
           data={kurs}
           dotsWithName
         />
         <DotedChart
-          title="ALLOKATIONSFAKTOR"
+          maxValue={maxValue}
+          title={allocationsTitle}
           data={allocations}
           dotsWithName
         />
@@ -37,15 +45,21 @@ class KursWidget extends React.PureComponent {
 KursWidget.defaultProps = {
   getData: noop,
   status: STATUSES.NOT_REQUESTED,
+  kursTitle: '',
+  allocationsTitle: '',
   kurs: {},
   allocations: {},
+  maxValue: 0,
 };
 
 KursWidget.propTypes = {
   getData: PropTypes.func,
   status: PropTypes.string,
+  kursTitle: PropTypes.string,
+  allocationsTitle: PropTypes.string,
   kurs: PropTypes.arrayOf(PropTypes.object),
   allocations: PropTypes.arrayOf(PropTypes.object),
+  maxValue: PropTypes.number,
 };
 
 export default KursWidget;

@@ -162,11 +162,11 @@ app.get('/api/kurs', (req, res) => {
   );
 
   const allocations = {
-    title: 'Kurs wahrung',
+    title: 'ALLOKATIONSFAKTOR',
     data: [],
   };
   const kurs = {
-    title: 'Allocations factor',
+    title: 'KURS-WÄHRUNG',
     data: [],
   }
 
@@ -198,7 +198,7 @@ app.get('/api/rsxbottomup', (req, res) => {
 
 app.get('/api/scheduling', (req, res) => {
   const data = [];
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < 7; i++) {
     data.push({
       date: faker.date.recent(40),
       type: faker.random.arrayElement(['Daily', 'Monthly', 'Quarterly']),

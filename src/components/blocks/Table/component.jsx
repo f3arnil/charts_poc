@@ -1,16 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
 class Table extends React.PureComponent {
   renderTableHeader = () => {
-    const { header } = this.props;
+    const { header, lightHeader } = this.props;
 
     return (
       <thead>
         <tr>
           {header.map((cell) => {
+            const thCN = cn(cell.className, { light: lightHeader });
             return (
-              <th key={cell.field}>{cell.title}</th>
+              <th
+                key={cell.field}
+                className={thCN}
+                width={cell.width}
+              >
+                {cell.title}
+              </th>
             );
           })}
         </tr>
@@ -29,11 +37,13 @@ class Table extends React.PureComponent {
           return (
             <tr key={rowKey}>
               {headerFields.map((field, indexCell) => {
+                const headerCell = header.find(cell => cell.field === field);
+                const headerClassName = headerCell.className;
                 const cellKey = `table-cell--${indexCell}--${field}`;
                 const value = row[field];
 
                 return (
-                  <td key={cellKey}>
+                  <td key={cellKey} className={headerClassName}>
                     {value}
                   </td>
                 );
@@ -60,10 +70,12 @@ Table.propTypes = {
   header: PropTypes.arrayOf(PropTypes.object).isRequired,
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
   showHeader: PropTypes.bool,
+  lightHeader: PropTypes.bool,
 };
 
 Table.defaultProps = {
   showHeader: true,
+  lightHeader: false,
 };
 
 export default Table;

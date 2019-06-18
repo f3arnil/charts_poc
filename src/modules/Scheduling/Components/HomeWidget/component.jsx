@@ -36,8 +36,9 @@ class SchedulingWidget extends React.PureComponent {
       return ('Loading...');
     }
     return (
-      <div className="system-status-block">
+      <div className="widget sheduling-widget">
         <Table
+          lightHeader
           data={this.getDataForTable()}
           header={headerConfig}
         />

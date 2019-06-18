@@ -40,7 +40,7 @@ class SystemStatusWidget extends React.PureComponent {
 
   render() {
     return (
-      <div className="widget system-status-block">
+      <div className="widget system-status-widget">
         {this.renderEvents()}
       </div>
     );

@@ -37,7 +37,7 @@ class SQDatenBaumWidget extends React.PureComponent {
 
   render() {
     return (
-      <div className="system-status-block">
+      <div className="widget sq-daten-baum-widget">
         <ChartsTitle
           className="text__yellow"
           iconClassName="bg__yellow"
@@ -47,7 +47,7 @@ class SQDatenBaumWidget extends React.PureComponent {
         />
         {/* TODO: change to tree generation  */}
         <img
-          style={{ width: '100%' }}
+          style={{ width: '70%' }}
           alt="Tree"
           src={treeImage}
         />

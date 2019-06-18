@@ -3,7 +3,6 @@ import cn from 'classnames';
 
 import DropArea from '@/components/blocks/DropArea';
 import {
-  WIDGET_TITLES,
   LEFT_BLOCK_DEFAULT_WIDGETS,
   RIGHT_BLOCK_DEFAULT_WIDGETS,
   CENTER_TOP_DEFAULT_WIDGETS,
@@ -14,7 +13,7 @@ const blocks = {
   left: {
     data: [{
       items: LEFT_BLOCK_DEFAULT_WIDGETS
-        .map(item => ({ type: item, title: WIDGET_TITLES[item] })),
+        .map(item => ({ type: item })),
       accepts: [
         ...LEFT_BLOCK_DEFAULT_WIDGETS,
         ...CENTER_TOP_DEFAULT_WIDGETS,
@@ -28,7 +27,7 @@ const blocks = {
       {
         direction: 'row',
         items: CENTER_TOP_DEFAULT_WIDGETS
-          .map(item => ({ type: item, title: WIDGET_TITLES[item] })),
+          .map(item => ({ type: item })),
         accepts: [
           ...LEFT_BLOCK_DEFAULT_WIDGETS,
           ...CENTER_TOP_DEFAULT_WIDGETS,
@@ -37,7 +36,7 @@ const blocks = {
       },
       {
         items: CENTER_BOTTOM_DEFAULT_WIDGETS
-          .map(item => ({ type: item, title: WIDGET_TITLES[item] })),
+          .map(item => ({ type: item })),
         accepts: [
           ...LEFT_BLOCK_DEFAULT_WIDGETS,
           ...CENTER_TOP_DEFAULT_WIDGETS,
@@ -50,7 +49,7 @@ const blocks = {
   right: {
     data: [{
       items: RIGHT_BLOCK_DEFAULT_WIDGETS
-        .map(item => ({ type: item, title: WIDGET_TITLES[item] })),
+        .map(item => ({ type: item })),
       accepts: [
         ...LEFT_BLOCK_DEFAULT_WIDGETS,
         ...CENTER_TOP_DEFAULT_WIDGETS,

@@ -38,7 +38,7 @@ class CheckScoreCardWidget extends React.PureComponent {
       return ('Loading...');
     }
     return (
-      <div className="system-status-block">
+      <div className="widget check-scorecard-widget">
         <Table
           data={this.getDataForTable()}
           header={headerConfig}

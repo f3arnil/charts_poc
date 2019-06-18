@@ -2,13 +2,14 @@ import React from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import noop from 'lodash/noop';
 import PropTypes from 'prop-types';
+import cn from 'classnames';
 
-import WidgetBlock from './component';
 import spreadIcon from '@/assets/icons/spread.svg';
+import { WIDGET_TITLES } from '@/constants/widgetTypes';
+import WidgetBlock from './component';
 
 const DragableWidgetBlock = ({
   type,
-  title,
   accept,
   findWidget,
   moveWidget,
@@ -71,21 +72,22 @@ const DragableWidgetBlock = ({
     },
   });
 
-  const opacity = isDragging ? 0.4 : 1;
+  const widgetBlockCN = cn('widget-block', {
+    dragging: isDragging,
+  });
 
   return (
     <div
-      className="widget-block"
+      className={widgetBlockCN}
       ref={preview}
-      style={{ opacity }}
     >
       <div className="widget-block__header">
-        <h4 ref={node => drag(drop(node))}>{title}</h4>
+        <h4 ref={node => drag(drop(node))}>{WIDGET_TITLES[type]}</h4>
+        {/* This ref ^ could be passed inside container */}
         <span className="actions">
           <img alt="Actions" src={spreadIcon} />
         </span>
       </div>
-      {/* This ref ^ could be passed inside container */}
       <WidgetBlock type={type} onRemove={removeWidget} />
     </div>
   );
@@ -93,7 +95,6 @@ const DragableWidgetBlock = ({
 
 DragableWidgetBlock.propTypes = {
   type: PropTypes.string,
-  title: PropTypes.string,
   accept: PropTypes.arrayOf(PropTypes.string),
   blockName: PropTypes.string,
   findWidget: PropTypes.func,
@@ -103,7 +104,6 @@ DragableWidgetBlock.propTypes = {
 
 DragableWidgetBlock.defaultProps = {
   type: '',
-  title: 'TITLE',
   accept: [],
   blockName: '',
   findWidget: noop,

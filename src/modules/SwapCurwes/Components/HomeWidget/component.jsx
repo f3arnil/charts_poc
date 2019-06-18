@@ -19,7 +19,7 @@ class SwapCurwesWidget extends React.PureComponent {
   }
 
   getDataForTable() {
-    const { list, change } = this.props;
+    const { list, change, maxValue } = this.props;
 
     const dataArray = concat([], list, [{
       name: <span className="small-text">Change in BP</span>,
@@ -32,6 +32,7 @@ class SwapCurwesWidget extends React.PureComponent {
         data: (
           <DotedChart
             withoutDots={index === dataArray.length - 1}
+            maxValue={maxValue}
             data={row.data}
           />),
       }));
@@ -46,7 +47,7 @@ class SwapCurwesWidget extends React.PureComponent {
       return ('Loading...');
     }
     return (
-      <div className="system-status-block">
+      <div className="widget swap-curves-widget">
         <Table
           showHeader={false}
           data={this.getDataForTable()}
@@ -62,6 +63,7 @@ SwapCurwesWidget.defaultProps = {
   status: STATUSES.NOT_REQUESTED,
   list: [],
   change: [],
+  maxValue: 0,
 };
 
 SwapCurwesWidget.propTypes = {
@@ -69,6 +71,7 @@ SwapCurwesWidget.propTypes = {
   status: PropTypes.string,
   list: PropTypes.arrayOf(PropTypes.object),
   change: PropTypes.arrayOf(PropTypes.number),
+  maxValue: PropTypes.number,
 };
 
 export default SwapCurwesWidget;

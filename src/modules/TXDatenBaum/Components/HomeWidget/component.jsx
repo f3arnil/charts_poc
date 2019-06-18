@@ -37,7 +37,7 @@ class TXDatenBaumWidget extends React.PureComponent {
 
   render() {
     return (
-      <div className="system-status-block">
+      <div className="widget tx-daten-widget">
         <ChartsTitle
           className="text__green"
           iconClassName="bg__green"
@@ -47,7 +47,7 @@ class TXDatenBaumWidget extends React.PureComponent {
         />
         {/* TODO: change to tree generation  */}
         <img
-          style={{ width: '100%' }}
+          style={{ width: '70%' }}
           alt="Tree"
           src={treeImage}
         />

@@ -3,18 +3,25 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import isObject from 'lodash/isObject';
 
+const MIN_DOT_SIZE = 2;
+const MAX_DOT_SIZE = 24;
+const DOT_SIZES_DIF = MAX_DOT_SIZE - MIN_DOT_SIZE;
+
 class DotedChart extends React.PureComponent {
-  static getDotSizes(value) {
-    const size = Math.abs(value) * 6;
+  getDotSizes(value) {
+    const absValue = Math.abs(value);
+    const { maxValue } = this.props;
+
+    const size = ((absValue / maxValue) * DOT_SIZES_DIF) + MIN_DOT_SIZE;
     return {
       width: `${size}px`,
       height: `${size}px`,
     };
   }
 
-  static renderName(value) {
+  static renderName(value, index) {
     const { name } = value;
-    const key = `name__${name}--${value.value}`;
+    const key = `name__${name}--${value.value}--${index}`;
 
     return (
       <span key={key} className="name">
@@ -27,16 +34,19 @@ class DotedChart extends React.PureComponent {
     const { withoutDots } = this.props;
     const isPositive = value > 0;
     const key = `number-dot__${value}--${index}`;
+    const dotSizes = !withoutDots ? this.getDotSizes(value) : null;
     const circleClassNameCN = cn('circle', {
       dark: !isPositive,
     });
     return (
       <div key={key} className="dot">
         {!withoutDots && (
-          <span
-            className={circleClassNameCN}
-            style={DotedChart.getDotSizes(value)}
-          />
+          <div className="circle-wrapper">
+            <span
+              className={circleClassNameCN}
+              style={dotSizes}
+            />
+          </div>
         )}
         <span className="value">
           {value}
@@ -45,35 +55,12 @@ class DotedChart extends React.PureComponent {
     );
   }
 
-  renderDotFromObject = (data) => {
-    const { value } = data;
-    const { withoutDots } = this.props;
-    const isPositive = value > 0;
-    const key = `dot__${value}--${data.name}`;
-    const circleClassNameCN = cn('circle', {
-      dark: !isPositive,
-    });
-    return (
-      <div key={key} className="dot">
-        {!withoutDots && (
-          <span
-            className={circleClassNameCN}
-            style={DotedChart.getDotSizes(value)}
-          />
-        )}
-        <span className="value">
-          {value}
-        </span>
-      </div>
-    );
-  }
-
-  renderDotElement = (value, index) => {
-    if (isObject(value)) {
-      return this.renderDotFromObject(value, index);
+  renderDotElement = (item, index) => {
+    if (isObject(item)) {
+      return this.renderDotFromNumber(item.value, index);
     }
 
-    return this.renderDotFromNumber(value, index);
+    return this.renderDotFromNumber(item, index);
   }
 
   render() {
@@ -107,13 +94,15 @@ DotedChart.propTypes = {
   withoutDots: PropTypes.bool,
   dotsWithName: PropTypes.bool,
   title: PropTypes.string,
+  maxValue: PropTypes.number,
 };
 
 DotedChart.defaultProps = {
   data: [],
-  title: '',
   withoutDots: false,
   dotsWithName: false,
+  title: '',
+  maxValue: 0,
 };
 
 export default DotedChart;
