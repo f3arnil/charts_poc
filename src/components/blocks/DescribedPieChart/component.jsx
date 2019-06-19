@@ -1,96 +1,68 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+import memoize from 'lodash/memoize';
 
 import PieChart from '@/components/blocks/PieChart';
 
-import {
-  GRUPPE_COLORS_BY_INDEX,
-  GRUPPE_CLASSES_BY_INDEX,
-} from '@/constants/charts';
+import { GRUPPE_CLASSES_BY_INDEX } from '@/constants/charts';
 
-class DescribedPieChart extends React.PureComponent {
-  constructor(props) {
-    super(props);
+const DEFAULT_CHART_PROPS = {
+  className: 'pie-chart',
+  lineWidth: 40,
+};
 
-    this.state = {
-      chartProps: {
-        className: 'pie-chart',
-        totalValue: this.getAllValueSumm(),
-        lineWidth: 40,
-      },
-      data: this.getDataForPieChart(),
-    };
-  }
+const DescribedPieChart = (props) => {
+  const { data, totalValue, title } = props;
 
-  getDataForPieChart = () => {
-    const { data } = this.props;
+  const getChartProps = memoize(totalValueProp => ({
+    ...DEFAULT_CHART_PROPS,
+    totalValue: totalValueProp,
+  }));
 
-    return data.map((row, index) => ({
-      ...row,
-      color: GRUPPE_COLORS_BY_INDEX[index],
-    }));
-  }
-
-  getAllValueSumm = () => {
-    const { data } = this.props;
-
-    return data.reduce((acc, row) => acc + Math.abs(row.value), 0);
-  }
-
-  renderChartDescription = () => {
-    const { data } = this.props;
-
-    return (
-      <div className="chart-description">
-        {data.map((row, index) => {
-          const descriptionClassNameCN = cn(
+  const renderChartDescription = () => (
+    <div className="chart-description">
+      {data.map((row, index) => (
+        <div
+          key={row.name}
+          className={cn(
             'value-description',
             GRUPPE_CLASSES_BY_INDEX[index],
-            {
-              first: index === 0,
-            },
-          );
-          const value = row.value - row.prevValue;
-          const valueString = `${value > 0 ? '+' : ''}${value.toFixed(2)}%`;
-          return (
-            <div key={row.name} className={descriptionClassNameCN}>
-              <span className="value">
-                {valueString}
-              </span>
-              <span className="name">
-                {row.name}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
+            { first: index === 0 },
+          )}
+        >
+          <span className="value">
+            {row.valueString}
+          </span>
+          <span className="name">
+            {row.name}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
 
-  render() {
-    const { title } = this.props;
-    const { chartProps, data } = this.state;
-    return (
-      <div className="described-pie-chart">
-        <PieChart
-          data={data}
-          chartProps={chartProps}
-        />
-        <h2>{title}</h2>
-        {this.renderChartDescription()}
-      </div>
-    );
-  }
-}
+  return (
+    <div className="described-pie-chart">
+      <PieChart
+        data={data}
+        chartProps={getChartProps(totalValue)}
+      />
+      <h2>{title}</h2>
+      {renderChartDescription()}
+    </div>
+  );
+};
 
 DescribedPieChart.defaultProps = {
   title: '',
   data: [],
+  totalValue: 0,
 };
 DescribedPieChart.propTypes = {
   title: PropTypes.string,
   data: PropTypes.arrayOf(PropTypes.object),
+  totalValue: PropTypes.number,
 };
 
-export default DescribedPieChart;
+export default React.memo(DescribedPieChart);

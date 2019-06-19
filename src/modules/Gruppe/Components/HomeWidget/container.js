@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import {
   getGruppeState,
-  getGruppeData,
+  getCustomGruppeData,
   beginRequestGruppe,
   beginClearGruppe,
 } from '../../redux';
@@ -11,7 +11,7 @@ import GruppeWidget from './component';
 export default connect(
   (state) => {
     const status = getGruppeState(state);
-    const data = getGruppeData(state);
+    const data = getCustomGruppeData(state);
 
     return {
       status,
