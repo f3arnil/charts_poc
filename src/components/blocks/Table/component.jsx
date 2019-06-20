@@ -2,80 +2,91 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-class Table extends React.PureComponent {
-  renderTableHeader = () => {
-    const { header, lightHeader } = this.props;
+const TableBody = ({ data, header }) => (
+  <tbody>
+    {data.map((row, indexRow) => {
+      const headerFields = header.map(cell => cell.field);
+      const rowKey = `table-row--${indexRow}--${headerFields.join('-')}`;
+      return (
+        <tr key={rowKey}>
+          {headerFields.map((field, indexCell) => {
+            const headerCell = header.find(cell => cell.field === field);
+            const headerClassName = headerCell.className;
+            const cellKey = `table-cell--${indexCell}--${field}`;
+            const value = row[field];
 
-    return (
-      <thead>
-        <tr>
-          {header.map((cell) => {
-            const thCN = cn(cell.className, { light: lightHeader });
             return (
-              <th
-                key={cell.field}
-                className={thCN}
-                width={cell.width}
-              >
-                {cell.title}
-              </th>
+              <td key={cellKey} className={headerClassName}>
+                {value}
+              </td>
             );
           })}
         </tr>
-      </thead>
-    );
-  }
+      );
+    })}
+  </tbody>
+);
 
-  renderTableBody = () => {
-    const { data, header } = this.props;
+TableBody.propTypes = {
+  header: PropTypes.arrayOf(PropTypes.object),
+  data: PropTypes.arrayOf(PropTypes.object),
+};
 
-    return (
-      <tbody>
-        {data.map((row, indexRow) => {
-          const headerFields = header.map(cell => cell.field);
-          const rowKey = `table-row--${indexRow}--${headerFields.join('-')}`;
-          return (
-            <tr key={rowKey}>
-              {headerFields.map((field, indexCell) => {
-                const headerCell = header.find(cell => cell.field === field);
-                const headerClassName = headerCell.className;
-                const cellKey = `table-cell--${indexCell}--${field}`;
-                const value = row[field];
+TableBody.defaultProps = {
+  header: [],
+  data: [],
+};
 
-                return (
-                  <td key={cellKey} className={headerClassName}>
-                    {value}
-                  </td>
-                );
-              })}
-            </tr>
-          );
-        })}
-      </tbody>
-    );
-  }
+const TableHeader = ({ lightHeader: light, header }) => (
+  <thead>
+    <tr>
+      {header.map((cell) => {
+        const thCN = cn(cell.className, { light });
+        return (
+          <th
+            key={cell.field}
+            className={thCN}
+            width={cell.width}
+          >
+            {cell.title}
+          </th>
+        );
+      })}
+    </tr>
+  </thead>
+);
 
-  render() {
-    const { showHeader } = this.props;
-    return (
-      <table className="table">
-        {showHeader && this.renderTableHeader()}
-        {this.renderTableBody()}
-      </table>
-    );
-  }
-}
-
-Table.propTypes = {
-  header: PropTypes.arrayOf(PropTypes.object).isRequired,
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  showHeader: PropTypes.bool,
+TableHeader.propTypes = {
+  header: PropTypes.arrayOf(PropTypes.object),
   lightHeader: PropTypes.bool,
 };
 
-Table.defaultProps = {
-  showHeader: true,
+TableHeader.defaultProps = {
+  header: [],
   lightHeader: false,
 };
+
+const Table = (props) => {
+  const { children } = props;
+  return (
+    <table className="table">
+      {children}
+    </table>
+  );
+};
+
+Table.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
+};
+
+Table.defaultProps = {
+  children: '',
+};
+
+Table.Header = React.memo(TableHeader);
+Table.Body = React.memo(TableBody);
 
 export default Table;

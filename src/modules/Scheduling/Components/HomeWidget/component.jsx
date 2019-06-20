@@ -37,11 +37,10 @@ class SchedulingWidget extends React.PureComponent {
     }
     return (
       <div className="widget sheduling-widget">
-        <Table
-          lightHeader
-          data={this.getDataForTable()}
-          header={headerConfig}
-        />
+        <Table>
+          <Table.Header header={headerConfig} lightHeader />
+          <Table.Body data={this.getDataForTable()} header={headerConfig} />
+        </Table>
       </div>
     );
   }

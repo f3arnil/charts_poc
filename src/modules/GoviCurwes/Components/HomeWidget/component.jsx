@@ -20,10 +20,13 @@ class GoviCurwesWidget extends React.PureComponent {
   getDataForTable = () => {
     const { list, change, maxValue } = this.props;
 
-    const dataArray = [...list, {
-      name: <span className="small-text">Change in BP</span>,
-      data: change,
-    }];
+    const dataArray = [
+      ...list,
+      {
+        name: <span className="small-text">Change in BP</span>,
+        data: change,
+      },
+    ];
 
     const dataArrayForRedner = dataArray
       .map((row, index) => ({
@@ -47,11 +50,14 @@ class GoviCurwesWidget extends React.PureComponent {
     }
     return (
       <div className="system-status-block">
-        <Table
+        <Table>
+          <Table.Body data={this.getDataForTable()} header={headerConfig} />
+        </Table>
+        {/* <Table
           showHeader={false}
           data={this.getDataForTable()}
           header={headerConfig}
-        />
+        /> */}
       </div>
     );
   }

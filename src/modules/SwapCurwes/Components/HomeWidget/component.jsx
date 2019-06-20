@@ -48,11 +48,9 @@ class SwapCurwesWidget extends React.PureComponent {
     }
     return (
       <div className="widget swap-curves-widget">
-        <Table
-          showHeader={false}
-          data={this.getDataForTable()}
-          header={headerConfig}
-        />
+        <Table>
+          <Table.Body data={this.getDataForTable()} header={headerConfig} />
+        </Table>
       </div>
     );
   }

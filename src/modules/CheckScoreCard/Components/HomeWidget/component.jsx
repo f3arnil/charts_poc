@@ -39,10 +39,10 @@ class CheckScoreCardWidget extends React.PureComponent {
     }
     return (
       <div className="widget check-scorecard-widget">
-        <Table
-          data={this.getDataForTable()}
-          header={headerConfig}
-        />
+        <Table>
+          <Table.Header header={headerConfig} />
+          <Table.Body data={this.getDataForTable()} header={headerConfig} />
+        </Table>
       </div>
     );
   }
