@@ -1,7 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classnames';
 import isObject from 'lodash/isObject';
+
+import {
+  DotedChartStyled,
+  Dots,
+  Dot,
+  CircleWrapper,
+  Circle,
+  Value,
+  Title,
+  NamesRow,
+  Name,
+} from './styledComponents';
 
 const MIN_DOT_SIZE = 2;
 const MAX_DOT_SIZE = 24;
@@ -24,9 +35,7 @@ class DotedChart extends React.PureComponent {
     const key = `name__${name}--${value.value}--${index}`;
 
     return (
-      <span key={key} className="name">
-        {name}
-      </span>
+      <Name key={key}>{name}</Name>
     );
   }
 
@@ -35,23 +44,19 @@ class DotedChart extends React.PureComponent {
     const isPositive = value > 0;
     const key = `number-dot__${value}--${index}`;
     const dotSizes = !withoutDots ? this.getDotSizes(value) : null;
-    const circleClassNameCN = cn('circle', {
-      dark: !isPositive,
-    });
+
     return (
-      <div key={key} className="dot">
+      <Dot key={key}>
         {!withoutDots && (
-          <div className="circle-wrapper">
-            <span
-              className={circleClassNameCN}
-              style={dotSizes}
+          <CircleWrapper>
+            <Circle
+              dark={!isPositive}
+              sizes={dotSizes}
             />
-          </div>
+          </CircleWrapper>
         )}
-        <span className="value">
-          {value}
-        </span>
-      </div>
+        <Value>{value}</Value>
+      </Dot>
     );
   }
 
@@ -65,23 +70,20 @@ class DotedChart extends React.PureComponent {
 
   render() {
     const { data, title, dotsWithName } = this.props;
-    const dotedChartCN = cn('doted-chart', { titled: !!title });
     return (
-      <div className={dotedChartCN}>
+      <DotedChartStyled titled={!!title}>
         {title && (
-          <h3 className="title">
-            {title}
-          </h3>
+          <Title>{title}</Title>
         )}
-        <div className="dots">
+        <Dots>
           {data.map(this.renderDotElement)}
-        </div>
+        </Dots>
         {dotsWithName && (
-          <div className="names-row">
+          <NamesRow>
             {data.map(DotedChart.renderName)}
-          </div>
+          </NamesRow>
         )}
-      </div>
+      </DotedChartStyled>
     );
   }
 }

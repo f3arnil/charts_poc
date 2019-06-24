@@ -5,6 +5,8 @@ import noop from 'lodash/noop';
 import { STATUSES } from '@/constants/redux';
 import DescribedPieChart from '@/components/blocks/DescribedPieChart';
 
+import GruppeWidgetStyled from './styledComponents';
+
 class GruppeWidget extends React.PureComponent {
   componentDidMount() {
     const { status, getData } = this.props;
@@ -18,14 +20,14 @@ class GruppeWidget extends React.PureComponent {
     const { data } = this.props;
 
     return (
-      <div className="widget gruppe-widget">
+      <GruppeWidgetStyled>
         {data.map((chart, index) => {
           const key = `described-pie-chart--${index}`;
           return (
             <DescribedPieChart key={key} {...chart} />
           );
         })}
-      </div>
+      </GruppeWidgetStyled>
     );
   }
 }

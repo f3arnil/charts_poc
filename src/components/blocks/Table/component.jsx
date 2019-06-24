@@ -1,6 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classnames';
+
+import {
+  TableStyled,
+  TableHeaderTr,
+  TableHeaderTh,
+  TableBodyTr,
+  TableBodyTd,
+} from './styledComponents';
 
 const TableBody = ({ data, header }) => (
   <tbody>
@@ -8,20 +15,28 @@ const TableBody = ({ data, header }) => (
       const headerFields = header.map(cell => cell.field);
       const rowKey = `table-row--${indexRow}--${headerFields.join('-')}`;
       return (
-        <tr key={rowKey}>
+        <TableBodyTr key={rowKey} smallText={row.smallText}>
           {headerFields.map((field, indexCell) => {
             const headerCell = header.find(cell => cell.field === field);
-            const headerClassName = headerCell.className;
             const cellKey = `table-cell--${indexCell}--${field}`;
-            const value = row[field];
+            let value = row[field];
+
+            if (value && value.component) {
+              const { component: Component } = value;
+              value = <Component {...value.props} />;
+            }
 
             return (
-              <td key={cellKey} className={headerClassName}>
+              <TableBodyTd
+                key={cellKey}
+                className={field}
+                rightText={headerCell.text === 'right'}
+              >
                 {value}
-              </td>
+              </TableBodyTd>
             );
           })}
-        </tr>
+        </TableBodyTr>
       );
     })}
   </tbody>
@@ -39,20 +54,19 @@ TableBody.defaultProps = {
 
 const TableHeader = ({ lightHeader: light, header }) => (
   <thead>
-    <tr>
-      {header.map((cell) => {
-        const thCN = cn(cell.className, { light });
-        return (
-          <th
-            key={cell.field}
-            className={thCN}
-            width={cell.width}
-          >
-            {cell.title}
-          </th>
-        );
-      })}
-    </tr>
+    <TableHeaderTr>
+      {header.map(cell => (
+        <TableHeaderTh
+          key={cell.field}
+          light={light}
+          rightText={cell.text === 'right'}
+          className={cell.field}
+          width={cell.width}
+        >
+          {cell.title}
+        </TableHeaderTh>
+      ))}
+    </TableHeaderTr>
   </thead>
 );
 
@@ -69,9 +83,9 @@ TableHeader.defaultProps = {
 const Table = (props) => {
   const { children } = props;
   return (
-    <table className="table">
+    <TableStyled>
       {children}
-    </table>
+    </TableStyled>
   );
 };
 

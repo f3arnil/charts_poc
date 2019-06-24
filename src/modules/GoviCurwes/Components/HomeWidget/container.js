@@ -2,9 +2,7 @@ import { connect } from 'react-redux';
 
 import {
   getGoviCurwesState,
-  getGoviCurwesDataList,
-  getGoviCurwesDataChange,
-  getMaxValue,
+  getCustomGoviCurwesData,
   beginRequestGoviCurwes,
 } from '../../redux';
 import GoviCurwesWidget from './component';
@@ -12,15 +10,11 @@ import GoviCurwesWidget from './component';
 export default connect(
   (state) => {
     const status = getGoviCurwesState(state);
-    const list = getGoviCurwesDataList(state);
-    const change = getGoviCurwesDataChange(state);
-    const maxValue = getMaxValue(state);
+    const data = getCustomGoviCurwesData(state);
 
     return {
       status,
-      list,
-      change,
-      maxValue,
+      data,
     };
   },
   {

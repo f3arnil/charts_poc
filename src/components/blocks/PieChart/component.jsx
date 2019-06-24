@@ -5,19 +5,19 @@ const DEFAULT_CHART_PROPS = {
   startAngle: -90,
   lengthWidth: -360,
   totalValue: 100,
-  animate: true,
   lineWidth: 30,
   background: '#454545',
 };
 
 const PieChart = (props) => {
-  const { data, chartProps } = props;
+  const { data, className, chartProps } = props;
   const assignedChartProps = {
     ...DEFAULT_CHART_PROPS,
     ...chartProps,
   };
   return (
     <ReactMinimalPieChart
+      className={className}
       data={data}
       {...assignedChartProps}
     />
@@ -26,6 +26,7 @@ const PieChart = (props) => {
 
 PieChart.defaultProps = {
   data: [],
+  className: '',
   chartProps: {
     ...DEFAULT_CHART_PROPS,
   },

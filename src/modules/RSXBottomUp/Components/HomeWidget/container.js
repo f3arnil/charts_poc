@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import {
   getRSXBottomUpState,
-  getRSXBottomUpValues,
+  getCustomRSXBottomUpValues,
   beginRequestRSXBottomUp,
 } from '../../redux';
 import RSXBottomUpWidget from './component';
@@ -10,7 +10,7 @@ import RSXBottomUpWidget from './component';
 export default connect(
   (state) => {
     const status = getRSXBottomUpState(state);
-    const values = getRSXBottomUpValues(state);
+    const values = getCustomRSXBottomUpValues(state);
 
     return {
       status,

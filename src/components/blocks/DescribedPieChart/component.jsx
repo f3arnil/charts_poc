@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classnames';
 import memoize from 'lodash/memoize';
 
-import PieChart from '@/components/blocks/PieChart';
-
-import { GRUPPE_CLASSES_BY_INDEX } from '@/constants/charts';
+import {
+  DescribedPieChartStyled,
+  Title,
+  PieChartStyled,
+  ChartDescription,
+  ValueDescription,
+  Value,
+  Name,
+} from './styledComponents';
 
 const DEFAULT_CHART_PROPS = {
-  className: 'pie-chart',
   lineWidth: 40,
 };
 
@@ -21,36 +25,33 @@ const DescribedPieChart = (props) => {
   }));
 
   const renderChartDescription = () => (
-    <div className="chart-description">
+    <ChartDescription>
       {data.map((row, index) => (
-        <div
+        <ValueDescription
           key={row.name}
-          className={cn(
-            'value-description',
-            GRUPPE_CLASSES_BY_INDEX[index],
-            { first: index === 0 },
-          )}
+          color={row.textColor}
+          first={index === 0}
         >
-          <span className="value">
+          <Value>
             {row.valueString}
-          </span>
-          <span className="name">
+          </Value>
+          <Name>
             {row.name}
-          </span>
-        </div>
+          </Name>
+        </ValueDescription>
       ))}
-    </div>
+    </ChartDescription>
   );
 
   return (
-    <div className="described-pie-chart">
-      <PieChart
+    <DescribedPieChartStyled>
+      <PieChartStyled
         data={data}
         chartProps={getChartProps(totalValue)}
       />
-      <h2>{title}</h2>
+      <Title>{title}</Title>
       {renderChartDescription()}
-    </div>
+    </DescribedPieChartStyled>
   );
 };
 

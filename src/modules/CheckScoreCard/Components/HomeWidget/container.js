@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import {
   getCheckScoreCardDataState,
-  getCheckScoreCardData,
+  getCustomCheckScoreCardData,
   beginRequestCheckScoreCardData,
 } from '../../redux';
 import CheckScoreCardWidget from './component';
@@ -10,7 +10,7 @@ import CheckScoreCardWidget from './component';
 export default connect(
   (state) => {
     const status = getCheckScoreCardDataState(state);
-    const data = getCheckScoreCardData(state);
+    const data = getCustomCheckScoreCardData(state);
 
     return {
       status,

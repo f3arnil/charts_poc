@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
 
 import { STATUSES } from '@/constants/redux';
-import {
-  CHART_COLORS_BY_INDEX,
-  CHART_CLASSES_BY_INDEX,
-} from '@/constants/charts';
 import ChartsTitle from '@/components/blocks/ChartsTitle';
 import gridIcon from '@/assets/icons/grid.svg';
 
@@ -21,28 +17,15 @@ class RSXBottomUpWidget extends React.PureComponent {
     }
   }
 
-  getChartTitleData() {
-    const { values } = this.props;
-
-    return values.map((value, index) => ({
-      values: [{
-        ...value,
-        color: CHART_COLORS_BY_INDEX[index],
-      }],
-      label: value.value,
-      className: CHART_CLASSES_BY_INDEX[index],
-    }));
-  }
-
   render() {
+    const { values } = this.props;
     return (
       <div className="widget rsx-bottom-up-widget">
         <ChartsTitle
-          className="text__red"
-          iconClassName="bg__red"
+          color="red"
           icon={gridIcon}
           title={WIDGET_TITLE}
-          charts={this.getChartTitleData()}
+          charts={values}
         />
       </div>
     );

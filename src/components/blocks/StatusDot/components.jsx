@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import StatusDotStyled from './styledComponents';
+
 const StatusDot = ({ color }) => (
-  <div
+  <StatusDotStyled
     className="status-dot"
-    style={{
-      background: color,
-    }}
+    color={color}
   />
 );
 

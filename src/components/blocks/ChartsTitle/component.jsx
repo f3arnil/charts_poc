@@ -1,66 +1,65 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cn from 'classnames';
 
 import PieChart from '@/components/blocks/PieChart';
+
+import {
+  ChartsTitleStyled,
+  IconWrapper,
+  Title,
+  TitleText,
+  Charts,
+  Chart,
+  Label,
+} from './styledComponents';
 
 class ChartsTitle extends React.PureComponent {
   render() {
     const {
-      className,
-      iconClassName,
-      titleClassName,
+      color,
       charts,
       icon,
       title,
     } = this.props;
-    const containerClassNameCN = cn('charts-title', className);
-    const titleClassNameCN = cn('title', titleClassName);
-    const iconClassNameCN = cn('icon-wrapper', iconClassName);
     return (
-      <div className={containerClassNameCN}>
-        <div className={titleClassNameCN}>
-          <div className={iconClassNameCN}>
+      <ChartsTitleStyled color={color}>
+        <Title>
+          <IconWrapper color={color}>
             {icon && (
               <img alt={title} src={icon} />
             )}
-          </div>
-          <h4>{title}</h4>
-        </div>
-        <div className="charts">
-          {charts.map((chart) => {
-            const chartKey = `${title}--chart-${chart.label}`;
-            const chartClassName = cn('chart', chart.className);
+          </IconWrapper>
+          <TitleText>{title}</TitleText>
+        </Title>
+        <Charts>
+          {charts.map((chart, index) => {
+            const chartKey = `${title}--chart-${chart.label}--${index}`;
             return (
-              <div key={chartKey} className={chartClassName}>
+              <Chart key={chartKey} color={chart.color}>
                 <PieChart data={chart.values} />
                 {chart.label && (
-                  <span className="label">
+                  <Label>
                     {chart.label}
-                  </span>
+                  </Label>
                 )}
-              </div>
+              </Chart>
             );
           })}
-        </div>
-      </div>
+        </Charts>
+      </ChartsTitleStyled>
     );
   }
 }
 
 ChartsTitle.defaultProps = {
-  className: '',
-  iconClassName: '',
-  titleClassName: '',
+  color: '',
   icon: '',
   title: '',
   charts: [],
 };
 
 ChartsTitle.propTypes = {
-  className: PropTypes.string,
-  iconClassName: PropTypes.string,
-  titleClassName: PropTypes.string,
+  color: PropTypes.string,
   icon: PropTypes.string,
   title: PropTypes.string,
   charts: PropTypes.arrayOf(PropTypes.object),

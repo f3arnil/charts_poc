@@ -7,31 +7,43 @@ import searchIcon from '@/assets/icons/search.svg';
 import starIcon from '@/assets/icons/star.svg';
 import userIcon from '@/assets/icons/user.svg';
 
-const Header = () => {
+import {
+  Header,
+  Section,
+  NavLink,
+  HeaderIcon,
+  Delimeter,
+  UserIcon,
+  DropIcon,
+  Chip,
+  ChipPart,
+} from './styledComponents';
+
+const HeaderComponent = () => {
   return (
-    <header className="header">
-      <a href="/" className="logo-section">
-        <img className="header-icon icon" alt="Q_TOR" src={logo} />
-        <img className="header-icon name" alt="Q_TOR" src={name} />
-        <div className="chip">
-          <span className="first part">VE3</span>
-          <span className="last part">Q17</span>
-        </div>
-      </a>
-      <nav className="navigation-section">
-        <a href="/" className="nav-link">CHECKS</a>
-        <a href="/" className="nav-link">SCHEDULING</a>
-        <a href="/" className="nav-link">REPORTS</a>
-      </nav>
-      <div className="user-section">
+    <Header>
+      <Section href="/">
+        <HeaderIcon alt="Q_TOR" src={logo} />
+        <HeaderIcon alt="Q_TOR" src={name} />
+        <Chip>
+          <ChipPart first>VE3</ChipPart>
+          <ChipPart last>Q17</ChipPart>
+        </Chip>
+      </Section>
+      <Section navigation>
+        <NavLink href="#">CHECKS</NavLink>
+        <NavLink href="#">SCHEDULING</NavLink>
+        <NavLink href="#">REPORTS</NavLink>
+      </Section>
+      <Section>
         <img alt="Search" src={searchIcon} />
-        <span className="delimeter" />
+        <Delimeter />
         <img alt="Favorite" src={starIcon} />
-        <img className="user-icon" alt="User" src={userIcon} />
-        <span className="drop-icon" />
-      </div>
-    </header>
+        <UserIcon alt="User" src={userIcon} />
+        <DropIcon />
+      </Section>
+    </Header>
   );
 };
 
-export default React.memo(Header);
+export default React.memo(HeaderComponent);

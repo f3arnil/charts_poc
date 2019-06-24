@@ -3,6 +3,7 @@ import get from 'lodash/get';
 
 import { getSwapCurwesData as getSwapCurwes } from '@/reducer/index';
 import getMaxModuloValue from '@/helpers/getMaxValue';
+import DotedChart from '@/components/blocks/DotedChart';
 
 export const getSwapCurwesState = createSelector(
   getSwapCurwes,
@@ -27,4 +28,39 @@ export const getSwapCurwesDataChange = createSelector(
 export const getMaxValue = createSelector(
   getSwapCurwesDataList,
   list => getMaxModuloValue(list, 'data'),
+);
+
+export const getCustomSwapCurwesData = createSelector(
+  getSwapCurwesDataList,
+  getSwapCurwesDataChange,
+  getMaxValue,
+  (list, change, maxValue) => {
+    if (!list) {
+      return [];
+    }
+
+    const dataArray = [
+      ...list,
+      {
+        name: 'Change in BP',
+        smallText: true,
+        data: change,
+      },
+    ];
+
+    const dataArrayForRedner = dataArray
+      .map((row, index) => ({
+        ...row,
+        data: {
+          component: DotedChart,
+          props: {
+            maxValue,
+            withoutDots: index === dataArray.length - 1,
+            data: row.data,
+          },
+        },
+      }));
+
+    return dataArrayForRedner;
+  },
 );

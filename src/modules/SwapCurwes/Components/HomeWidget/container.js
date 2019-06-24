@@ -2,9 +2,7 @@ import { connect } from 'react-redux';
 
 import {
   getSwapCurwesState,
-  getSwapCurwesDataList,
-  getSwapCurwesDataChange,
-  getMaxValue,
+  getCustomSwapCurwesData,
   beginRequestSwapCurwes,
 } from '../../redux';
 import SwapCurwesWidget from './component';
@@ -12,15 +10,11 @@ import SwapCurwesWidget from './component';
 export default connect(
   (state) => {
     const status = getSwapCurwesState(state);
-    const list = getSwapCurwesDataList(state);
-    const change = getSwapCurwesDataChange(state);
-    const maxValue = getMaxValue(state);
+    const data = getCustomSwapCurwesData(state);
 
     return {
       status,
-      list,
-      change,
-      maxValue,
+      data,
     };
   },
   {

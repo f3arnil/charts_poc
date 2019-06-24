@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
-import cn from 'classnames';
 
 import { STATUSES } from '@/constants/redux';
 import { getFormatedDate } from '@/helpers/formaters';
+
+import {
+  StyledStatusWidgetStyled,
+  Event,
+  Description,
+  Date,
+} from './styledComponents';
 
 class SystemStatusWidget extends React.PureComponent {
   componentDidMount() {
@@ -21,28 +27,24 @@ class SystemStatusWidget extends React.PureComponent {
 
     return eventsForRender.map((event, index) => {
       const isFirst = index === 0;
-      const className = cn({
-        event: true,
-        first: isFirst,
-      });
       return (
-        <div className={className} key={event.date}>
-          <h3 className="date">
+        <Event first={isFirst}>
+          <Date large={isFirst}>
             {getFormatedDate(event.date)}
-          </h3>
-          <p className="description">
+          </Date>
+          <Description>
             {event.description}
-          </p>
-        </div>
+          </Description>
+        </Event>
       );
     });
   }
 
   render() {
     return (
-      <div className="widget system-status-widget">
+      <StyledStatusWidgetStyled>
         {this.renderEvents()}
-      </div>
+      </StyledStatusWidgetStyled>
     );
   }
 }

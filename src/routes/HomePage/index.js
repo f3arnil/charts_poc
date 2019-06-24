@@ -1,3 +1,3 @@
-import HomePage from './component';
+import TestPage from './component';
 
-export default HomePage;
+export default TestPage;

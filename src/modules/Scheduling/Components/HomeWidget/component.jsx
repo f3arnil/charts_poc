@@ -1,13 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
+import styled from 'styled-components';
 
 import { STATUSES } from '@/constants/redux';
 import Table from '@/components/blocks/Table';
-import StatusDot from '@/components/blocks/StatusDot';
-import PlanBlock from '@/components/blocks/PlanBlock';
+import Widget from '@/components/styled/Widget';
 
 import headerConfig from './tableConfig';
+
+const Scheduling = styled(Widget)`
+  td.name {
+    width: 70px;
+  }
+`;
 
 class SchedulingWidget extends React.PureComponent {
   componentDidMount() {
@@ -17,31 +23,19 @@ class SchedulingWidget extends React.PureComponent {
     }
   }
 
-  getDataForTable() {
-    const { events } = this.props;
-
-    const dataArrayForRedner = events
-      .map(row => ({
-        plan: <PlanBlock {...row} />,
-        status: <StatusDot color={row.status} />,
-      }));
-
-    return dataArrayForRedner;
-  }
-
   render() {
-    const { status } = this.props;
+    const { status, events } = this.props;
 
     if (status !== STATUSES.IDLE) {
       return ('Loading...');
     }
     return (
-      <div className="widget sheduling-widget">
+      <Scheduling>
         <Table>
           <Table.Header header={headerConfig} lightHeader />
-          <Table.Body data={this.getDataForTable()} header={headerConfig} />
+          <Table.Body data={events} header={headerConfig} />
         </Table>
-      </div>
+      </Scheduling>
     );
   }
 }

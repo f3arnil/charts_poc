@@ -1,5 +1,5 @@
 import React from 'react';
-import { WIDGET_TYPES } from '@/constants/widgetTypes';
+import { WIDGET_TYPES } from '@/constants/widgets';
 
 import { SystemStatusWidget } from '@/modules/SystemStatus/Components';
 import { SwapCurwesWidget } from '@/modules/SwapCurwes/Components';
@@ -12,7 +12,7 @@ import { GruppeWidget } from '@/modules/Gruppe/Components';
 import { GoviCurwesWidget } from '@/modules/GoviCurwes/Components';
 import { CheckScoreCardWidget } from '@/modules/CheckScoreCard/Components';
 
-const WidgetBlock = (props) => {
+const WidgetByType = (props) => {
   const { type } = props;
 
   switch (type) {
@@ -40,4 +40,4 @@ const WidgetBlock = (props) => {
   }
 };
 
-export default React.memo(WidgetBlock);
+export default React.memo(WidgetByType);

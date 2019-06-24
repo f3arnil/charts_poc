@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import {
   getSchedulingDataState,
-  getSchedulingDataEvents,
+  getCustomSchedulingDataEvents,
   beginRequestSchedulingData,
   beginClearSchedulingData,
 } from '../../redux';
@@ -11,7 +11,7 @@ import SchedulingWidget from './component';
 export default connect(
   (state) => {
     const status = getSchedulingDataState(state);
-    const events = getSchedulingDataEvents(state);
+    const events = getCustomSchedulingDataEvents(state);
 
     return {
       status,

@@ -3,13 +3,9 @@ import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
 
 import { STATUSES } from '@/constants/redux';
-import {
-  CHART_COLORS_BY_INDEX,
-  CHART_CLASSES_BY_INDEX,
-} from '@/constants/charts';
 import ChartsTitle from '@/components/blocks/ChartsTitle';
+import Tree from '@/components/blocks/Tree';
 import treeIcon from '@/assets/icons/tree.svg';
-import treeImage from '@/assets/tree.jpg';
 
 const WIDGET_TITLE = 'SQ';
 
@@ -22,35 +18,17 @@ class SQDatenBaumWidget extends React.PureComponent {
     }
   }
 
-  getChartTitleData() {
-    const { values } = this.props;
-
-    return values.map((value, index) => ({
-      values: [{
-        ...value,
-        color: CHART_COLORS_BY_INDEX[index],
-      }],
-      label: value.value,
-      className: CHART_CLASSES_BY_INDEX[index],
-    }));
-  }
-
   render() {
+    const { values } = this.props;
     return (
       <div className="widget sq-daten-baum-widget">
         <ChartsTitle
-          className="text__yellow"
-          iconClassName="bg__yellow"
+          color="yellow"
           icon={treeIcon}
           title={WIDGET_TITLE}
-          charts={this.getChartTitleData()}
+          charts={values}
         />
-        {/* TODO: change to tree generation  */}
-        <img
-          style={{ width: '70%' }}
-          alt="Tree"
-          src={treeImage}
-        />
+        <Tree />
       </div>
     );
   }

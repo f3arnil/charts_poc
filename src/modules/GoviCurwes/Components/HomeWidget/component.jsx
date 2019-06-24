@@ -4,8 +4,8 @@ import noop from 'lodash/noop';
 
 import { STATUSES } from '@/constants/redux';
 import Table from '@/components/blocks/Table';
-import DotedChart from '@/components/blocks/DotedChart';
 
+import GoviCurwes from './styledComponents';
 import headerConfig from './tableConfig';
 
 class GoviCurwesWidget extends React.PureComponent {
@@ -17,48 +17,18 @@ class GoviCurwesWidget extends React.PureComponent {
     }
   }
 
-  getDataForTable = () => {
-    const { list, change, maxValue } = this.props;
-
-    const dataArray = [
-      ...list,
-      {
-        name: <span className="small-text">Change in BP</span>,
-        data: change,
-      },
-    ];
-
-    const dataArrayForRedner = dataArray
-      .map((row, index) => ({
-        ...row,
-        data: (
-          <DotedChart
-            maxValue={maxValue}
-            withoutDots={index === dataArray.length - 1}
-            data={row.data}
-          />),
-      }));
-
-    return dataArrayForRedner;
-  }
-
   render() {
-    const { status } = this.props;
+    const { status, data } = this.props;
 
     if (status !== STATUSES.IDLE) {
       return ('Loading...');
     }
     return (
-      <div className="system-status-block">
+      <GoviCurwes>
         <Table>
-          <Table.Body data={this.getDataForTable()} header={headerConfig} />
+          <Table.Body data={data} header={headerConfig} />
         </Table>
-        {/* <Table
-          showHeader={false}
-          data={this.getDataForTable()}
-          header={headerConfig}
-        /> */}
-      </div>
+      </GoviCurwes>
     );
   }
 }
@@ -66,17 +36,13 @@ class GoviCurwesWidget extends React.PureComponent {
 GoviCurwesWidget.defaultProps = {
   getData: noop,
   status: STATUSES.NOT_REQUESTED,
-  list: [],
-  change: [],
-  maxValue: 0,
+  data: [],
 };
 
 GoviCurwesWidget.propTypes = {
   getData: PropTypes.func,
   status: PropTypes.string,
-  list: PropTypes.arrayOf(PropTypes.object),
-  change: PropTypes.arrayOf(PropTypes.number),
-  maxValue: PropTypes.number,
+  data: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default GoviCurwesWidget;

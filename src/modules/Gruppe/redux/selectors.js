@@ -2,7 +2,10 @@ import { createSelector } from 'reselect';
 import get from 'lodash/get';
 import { getGruppeData as getGruppe } from '@/reducer/index';
 
-import { GRUPPE_COLORS_BY_INDEX } from '@/constants/charts';
+import {
+  GRUPPE_COLORS_BY_INDEX,
+  GRUPPE_CLASSES_BY_INDEX,
+} from '@/constants/charts';
 
 export const getGruppeState = createSelector(
   getGruppe,
@@ -26,6 +29,7 @@ export const getCustomGruppeData = createSelector(
 
           return ({
             ...row,
+            textColor: GRUPPE_CLASSES_BY_INDEX[index],
             color: GRUPPE_COLORS_BY_INDEX[index],
             valueString,
           });
