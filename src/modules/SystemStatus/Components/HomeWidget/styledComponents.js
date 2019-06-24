@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Widget from '@/components/styled/Widget';
 
 export const StyledStatusWidgetStyled = styled(Widget)`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: ${props => props.theme.fontWeights.thin};
 `;
 

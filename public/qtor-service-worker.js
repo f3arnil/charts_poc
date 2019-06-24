@@ -1,8 +1,8 @@
 /* global self, location */
 /* eslint no-restricted-globals: ["error"] */
 
-const STATIC_CACHE = 'medlab-static-cache';
-const DYNAMIC_CACHE = 'medlab-dynamic-cache';
+const STATIC_CACHE = 'qtor-static-cache';
+const DYNAMIC_CACHE = 'qtor-dynamic-cache';
 
 const staticAssets = [
   './',

@@ -39,44 +39,44 @@ TreeComponent.defaultProps = {
     title: 'Parent',
     childeren: [
       {
-        title: '1',
+        title: 'Some words',
         childeren: [
           {
-            title: '1',
+            title: 'Some words',
           },
           {
-            title: '2',
+            title: 'Some words',
           },
           {
-            title: '3',
+            title: 'Some words',
           },
         ],
       },
       {
-        title: '2',
+        title: 'Some words',
         childeren: [
           {
-            title: '1',
+            title: 'Some words',
           },
           {
-            title: '2',
+            title: 'Some words',
           },
           {
-            title: '3',
+            title: 'Some words',
           },
         ],
       },
       {
-        title: '3',
+        title: 'Some words',
         childeren: [
           {
-            title: '1',
+            title: 'Some words',
           },
           {
-            title: '2',
+            title: 'Some words',
           },
           {
-            title: '3',
+            title: 'Some words',
           },
         ],
       },

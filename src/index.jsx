@@ -51,7 +51,7 @@ const isDevEnvironment = process.env.NODE_ENV === 'development';
 const registerServiceWorker = () => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-      .register('medlab-service-worker.js')
+      .register('qtor-service-worker.js')
       .then(() => ({}))
       .catch((error) => {
         // eslint-disable-next-line

@@ -132,24 +132,7 @@ class HomePage extends React.PureComponent {
     this.state = {
       prevItems: itemsList,
       items: itemsList,
-      newCounter: 0,
     };
-  }
-
-  onAddItem = () => {
-    const { newCounter, items } = this.state;
-    console.log('adding', 'n', newCounter);
-    this.setState({
-      // Add a new item. It must have a unique key!
-      items: items.concat({
-        i: newCounter,
-        x: (items.length * 2) % (12),
-        y: Infinity, // puts it at the bottom
-        w: 2,
-        h: 2,
-      }),
-      newCounter: newCounter + 1,
-    });
   }
 
   onLayoutChange = (items) => {
@@ -158,59 +141,38 @@ class HomePage extends React.PureComponent {
 
     if (deletedItem && deletedItem.i) {
       const prevItemsByY = prevItems.filter(widget => widget.y === deletedItem.y);
-      const prevItemsByX = prevItems.filter(widget => widget.x === deletedItem.x);
       const indexByY = prevItemsByY.findIndex(widget => widget.i === deletedItem.i);
-      const indexByX = prevItemsByX.findIndex(widget => widget.i === deletedItem.i);
       const currentItemsByY = items
         .filter(widget => widget.x >= deletedItem.x && widget.y === deletedItem.y);
       const currentItemsByX = items
         .filter(widget => widget.y >= deletedItem.y && widget.x === deletedItem.x);
-      const itemAtDeletePosition = currentItemsByY[0] || null;
 
-      const changedY = prevItemsByY.length !== currentItemsByY.length;
-      console.log('TCL: AddRemoveLayout -> onLayoutChange -> changedY', changedY);
-      const changedX = prevItemsByX.length !== currentItemsByX.length;
-      console.log('TCL: AddRemoveLayout -> onLayoutChange -> changedX', changedX);
-
-      console.log('TCL: AddRemoveLayout -> onLayoutChange -> itemAtDeletePosition', itemAtDeletePosition);
-      const itemsByYAfterCurrent = indexByY !== -1 && !itemAtDeletePosition
-        ? prevItemsByY
-          .slice(indexByY + 1)
+      const itemsByYAfterCurrent = (indexByY !== -1 && currentItemsByX.length === 0)
+        || (currentItemsByY.length > 0 && currentItemsByX.length === 0)
+        || (currentItemsByX.length === 1 && currentItemsByX[0].w > currentItemsByY[0].w)
+        ? currentItemsByY
           .map(widget => ({
             ...widget,
-            x: widget.x - deletedItem.w,
+            x: widget.h >= deletedItem.h ? widget.x - deletedItem.w : widget.x,
           }))
-        : prevItemsByY;
-
-      console.log('> TCL: AddRemoveLayout -> onLayoutChange -> prevItemsByY', prevItemsByY);
-      console.log('> TCL: AddRemoveLayout -> onLayoutChange -> currentItemsByY', currentItemsByY);
-      console.log('> TCL: AddRemoveLayout -> onLayoutChange -> indexByY', indexByY);
-      console.log(' > TCL: AddRemoveLayout -> onLayoutChange -> prevItemsByX', prevItemsByX);
-      console.log(' > TCL: AddRemoveLayout -> onLayoutChange -> currentItemsByX', currentItemsByX);
-      console.log(' > TCL: AddRemoveLayout -> onLayoutChange -> indexByX', indexByX);
-      console.log('   > TCL: AddRemoveLayout -> onLayoutChange -> itemsByYAfterCurrent', itemsByYAfterCurrent);
+        : currentItemsByY;
 
       const newItems = stateItems.map((widget) => {
         const updatedWidget = itemsByYAfterCurrent.find(item => item.i === widget.i);
+        const currentWidget = items.find(item => item.i === widget.i);
 
-        if (updatedWidget) {
-          return updatedWidget;
-        }
-
-        return widget;
+        return ({
+          ...widget,
+          ...currentWidget,
+          x: updatedWidget ? updatedWidget.x : currentWidget.x,
+        });
       });
-      console.log('>>> TCL: AddRemoveLayout -> onLayoutChange -> newItems', newItems);
 
       this.setState({
         items: newItems,
         prevItems: newItems,
       });
     }
-  }
-
-  // We're using the cols coming back from this to calculate where to add new items.
-  onBreakpointChange = (breakpoint, cols) => {
-    console.log('TCL: AddRemoveLayout -> onBreakpointChange', breakpoint, cols);
   }
 
   onRemoveItem = i => () => {
@@ -237,7 +199,6 @@ class HomePage extends React.PureComponent {
     return (
       <ResponsiveReactGridLayout
         onLayoutChange={this.onLayoutChange}
-        onBreakpointChange={this.onBreakpointChange}
         breakpoints={{
           lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0,
         }}
