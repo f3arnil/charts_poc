@@ -4,6 +4,7 @@ import noop from 'lodash/noop';
 
 import { STATUSES } from '@/constants/redux';
 import DescribedPieChart from '@/components/blocks/DescribedPieChart';
+import Loader from '@/components/blocks/Loader';
 
 import GruppeWidgetStyled from './styledComponents';
 
@@ -17,7 +18,11 @@ class GruppeWidget extends React.PureComponent {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, status } = this.props;
+
+    if (status !== STATUSES.IDLE) {
+      return (<Loader />);
+    }
 
     return (
       <GruppeWidgetStyled>

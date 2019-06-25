@@ -4,6 +4,7 @@ import noop from 'lodash/noop';
 
 import { STATUSES } from '@/constants/redux';
 import ChartsTitle from '@/components/blocks/ChartsTitle';
+import Loader from '@/components/blocks/Loader';
 import gridIcon from '@/assets/icons/grid.svg';
 
 const WIDGET_TITLE = 'RSX';
@@ -18,7 +19,12 @@ class RSXBottomUpWidget extends React.PureComponent {
   }
 
   render() {
-    const { values } = this.props;
+    const { values, status } = this.props;
+
+    if (status !== STATUSES.IDLE) {
+      return (<Loader />);
+    }
+
     return (
       <div className="widget rsx-bottom-up-widget">
         <ChartsTitle

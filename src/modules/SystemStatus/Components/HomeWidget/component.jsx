@@ -4,6 +4,7 @@ import noop from 'lodash/noop';
 
 import { STATUSES } from '@/constants/redux';
 import { getFormatedDate } from '@/helpers/formaters';
+import Loader from '@/components/blocks/Loader';
 
 import {
   StyledStatusWidgetStyled,
@@ -41,6 +42,11 @@ class SystemStatusWidget extends React.PureComponent {
   }
 
   render() {
+    const { status } = this.props;
+
+    if (status !== STATUSES.IDLE) {
+      return (<Loader />);
+    }
     return (
       <StyledStatusWidgetStyled>
         {this.renderEvents()}

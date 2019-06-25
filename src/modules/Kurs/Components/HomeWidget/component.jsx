@@ -4,6 +4,7 @@ import noop from 'lodash/noop';
 
 import { STATUSES } from '@/constants/redux';
 import DotedChart from '@/components/blocks/DotedChart';
+import Loader from '@/components/blocks/Loader';
 
 class KursWidget extends React.PureComponent {
   componentDidMount() {
@@ -16,12 +17,17 @@ class KursWidget extends React.PureComponent {
 
   render() {
     const {
+      status,
       kurs,
       maxValue,
       allocations,
       kursTitle,
       allocationsTitle,
     } = this.props;
+
+    if (status !== STATUSES.IDLE) {
+      return (<Loader />);
+    }
 
     return (
       <div className="widget kurs-allokationsfaktor-widget">

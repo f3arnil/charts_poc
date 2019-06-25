@@ -73,4 +73,5 @@ export const WidgetAction = styled.div`
 
 export const Title = styled.h4`
   margin: 0;
+  cursor: default;
 `;

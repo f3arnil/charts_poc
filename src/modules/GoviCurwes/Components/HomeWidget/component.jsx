@@ -4,6 +4,7 @@ import noop from 'lodash/noop';
 
 import { STATUSES } from '@/constants/redux';
 import Table from '@/components/blocks/Table';
+import Loader from '@/components/blocks/Loader';
 
 import GoviCurwes from './styledComponents';
 import headerConfig from './tableConfig';
@@ -21,7 +22,7 @@ class GoviCurwesWidget extends React.PureComponent {
     const { status, data } = this.props;
 
     if (status !== STATUSES.IDLE) {
-      return ('Loading...');
+      return (<Loader />);
     }
     return (
       <GoviCurwes>

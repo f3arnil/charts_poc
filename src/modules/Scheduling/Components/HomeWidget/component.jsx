@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { STATUSES } from '@/constants/redux';
 import Table from '@/components/blocks/Table';
+import Loader from '@/components/blocks/Loader';
 import Widget from '@/components/styled/Widget';
 
 import headerConfig from './tableConfig';
@@ -27,7 +28,7 @@ class SchedulingWidget extends React.PureComponent {
     const { status, events } = this.props;
 
     if (status !== STATUSES.IDLE) {
-      return ('Loading...');
+      return (<Loader />);
     }
     return (
       <Scheduling>

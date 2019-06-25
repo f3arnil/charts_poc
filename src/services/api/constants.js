@@ -1,4 +1,4 @@
-export const API_HOST = 'http://www.charts.funkyweb.biz:3001';
+export const API_HOST = 'http://www.charts.funkyweb.biz';
 export const BASE_API_URL = '/api';
 export const API_URL = `${API_HOST}${BASE_API_URL}`;
 

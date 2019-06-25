@@ -4,6 +4,7 @@ import noop from 'lodash/noop';
 
 import { STATUSES } from '@/constants/redux';
 import Table from '@/components/blocks/Table';
+import Loader from '@/components/blocks/Loader';
 
 import headerConfig from './tableConfig';
 
@@ -20,7 +21,7 @@ class CheckScoreCardWidget extends React.PureComponent {
     const { status, data } = this.props;
 
     if (status !== STATUSES.IDLE) {
-      return ('Loading...');
+      return (<Loader />);
     }
     return (
       <div className="widget check-scorecard-widget">
