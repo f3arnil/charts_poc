@@ -29,7 +29,7 @@ class SystemStatusWidget extends React.PureComponent {
     return eventsForRender.map((event, index) => {
       const isFirst = index === 0;
       return (
-        <Event first={isFirst}>
+        <Event key={event.date} first={isFirst}>
           <Date large={isFirst}>
             {getFormatedDate(event.date)}
           </Date>

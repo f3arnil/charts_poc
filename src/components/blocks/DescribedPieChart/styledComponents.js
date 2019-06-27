@@ -28,11 +28,12 @@ export const ChartDescription = styled.div`
   justify-content: space-between;
   font-family: ${props => props.theme.fonts.secondary};
   font-style: normal;
-  font-size: 15px;
+  font-size: 13px;
   line-height: 18px;
 `;
 
 export const ValueDescription = styled.div`
+  margin: 0 auto;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -60,6 +61,6 @@ export const Value = styled.span`
 `;
 
 export const Name = styled.span`
-  font-size: 12px;
+  font-size: 10px;
   line-height: 14px;
 `;

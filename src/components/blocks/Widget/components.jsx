@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import noop from 'lodash/noop';
-import Popup from 'reactjs-popup';
 
 import spreadIcon from '@/assets/icons/spread.svg';
 import WidgetByType from '@/components/blocks/WidgetByType';
+import Button from '@/components/styled/Button';
 
 import {
   WidgetBlock,
@@ -14,6 +14,7 @@ import {
   WidgetActionsContainer,
   WidgetAction,
   WidgetDeleteModal,
+  WidgetDeleteModalContent,
   WidgetDeleteControls,
   Title,
 } from './styledComponents';
@@ -66,20 +67,31 @@ class DragableWidgetBlock extends React.PureComponent {
           <WidgetByType type={type} />
         </WidgetWrapper>
         {removeWidget && (
-          <Popup
+          <WidgetDeleteModal
             open={isOpenPopup}
             closeOnDocumentClick
             onClose={this.closeDeletePopup}
           >
-            <WidgetDeleteModal>
-              Delete this widget?
-            </WidgetDeleteModal>
+            <WidgetDeleteModalContent>
+              <p>Delete this widget?</p>
 
-            <WidgetDeleteControls>
-              <button type="button" onClick={removeWidget}>Yes</button>
-              <button type="button" onClick={this.closeDeletePopup}>No</button>
-            </WidgetDeleteControls>
-          </Popup>
+              <WidgetDeleteControls>
+                <Button
+                  type="button"
+                  onClick={removeWidget}
+                >
+                  Yes
+                </Button>
+                <Button
+                  primary
+                  type="button"
+                  onClick={this.closeDeletePopup}
+                >
+                  No
+                </Button>
+              </WidgetDeleteControls>
+            </WidgetDeleteModalContent>
+          </WidgetDeleteModal>
         )}
       </WidgetBlock>
     );

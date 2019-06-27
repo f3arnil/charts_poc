@@ -12,7 +12,7 @@ class TreeComponent extends React.PureComponent {
   renderNodeWithChilds = (node, isFirst = false) => {
     return (
       <TreeNode>
-        <TreeNodeTitle first={isFirst} parently={node.childeren}>
+        <TreeNodeTitle key={node.title} first={isFirst} parently={node.childeren}>
           {node.title}
         </TreeNodeTitle>
         {node.childeren && (
@@ -39,44 +39,44 @@ TreeComponent.defaultProps = {
     title: 'Parent',
     childeren: [
       {
-        title: 'Some words',
+        title: 'Some words 1',
         childeren: [
           {
-            title: 'Some words',
+            title: 'Some words 11',
           },
           {
-            title: 'Some words',
+            title: 'Some words 12',
           },
           {
-            title: 'Some words',
+            title: 'Some words 13',
           },
         ],
       },
       {
-        title: 'Some words',
+        title: 'Some words 2',
         childeren: [
           {
-            title: 'Some words',
+            title: 'Some words 21',
           },
           {
-            title: 'Some words',
+            title: 'Some words 22',
           },
           {
-            title: 'Some words',
+            title: 'Some words 23',
           },
         ],
       },
       {
-        title: 'Some words',
+        title: 'Some words 3',
         childeren: [
           {
-            title: 'Some words',
+            title: 'Some words 31',
           },
           {
-            title: 'Some words',
+            title: 'Some words 32',
           },
           {
-            title: 'Some words',
+            title: 'Some words 33',
           },
         ],
       },

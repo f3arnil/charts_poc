@@ -10,14 +10,14 @@ export const IconWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: ${props => props.theme.colors[props.color]};
 
   img {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
   }
 `;
 
@@ -28,10 +28,10 @@ export const Title = styled.div`
 `;
 
 export const TitleText = styled.h4`
-  font-size: 40px;
+  font-size: 30px;
   font-weight: ${props => props.theme.fontWeights.thin};
   margin: 0;
-  margin-left: 10px;
+  margin-left: 5px;
 `;
 
 export const Charts = styled.div`
@@ -42,12 +42,12 @@ export const Charts = styled.div`
 export const Chart = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 10px;
+  margin-right: 5px;
   color: ${props => props.theme.colors[props.color]};
 
   div {
-    height: 30px;
-    width: 30px;
+    height: 25px;
+    width: 25px;
   }
 `;
 

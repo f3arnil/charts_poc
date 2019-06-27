@@ -26,12 +26,12 @@ export const getAllocations = createSelector(
 
 export const getKursTitle = createSelector(
   getKursData,
-  data => get(data, 'kurs.title', []),
+  data => get(data, 'kurs.title', ''),
 );
 
 export const getAllocationsTitle = createSelector(
   getKursData,
-  data => get(data, 'allocations.title', []),
+  data => get(data, 'allocations.title', ''),
 );
 
 export const getMaxValue = createSelector(

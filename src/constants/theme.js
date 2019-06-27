@@ -3,6 +3,8 @@ export const lightWhite = '#FFFFFF33';
 export const bunker = '#181f23';
 export const grey = '#63666B';
 export const woodsmoke = '#14191D';
+export const mirage = '#192227';
+export const athensGrey = '#E8E9ED';
 
 export const green = '#05a46c';
 export const yellow = '#f8ec12';
@@ -23,6 +25,8 @@ export const colors = {
   bunker,
   grey,
   woodsmoke,
+  mirage,
+  athensGrey,
   green,
   yellow,
   red,

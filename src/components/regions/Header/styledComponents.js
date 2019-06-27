@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+const notForMobile = `
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
 export const Header = styled.header`
   width: 100%;
   height: 35px;
@@ -9,7 +15,7 @@ export const Header = styled.header`
   justify-content: space-between;
 `;
 
-export const Section = styled.a`
+export const Section = styled.div`
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -17,6 +23,12 @@ export const Section = styled.a`
   ${props => props.navigation && `
     margin-left: 107px;
     margin-right: auto;
+
+    ${notForMobile}
+
+    @media only screen and (max-width: 1024px) {
+      margin-left: auto;
+    }
   `}
 `;
 
@@ -64,6 +76,8 @@ export const Chip = styled.div`
   font-weight: ${props => props.theme.fontWeights.bold};
   font-size: 12px;
   line-height: 14px;
+
+  ${notForMobile}
 `;
 
 export const ChipPart = styled.span`

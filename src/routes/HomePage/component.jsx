@@ -6,132 +6,21 @@ import differenceBy from 'lodash/differenceBy';
 
 import 'react-grid-layout/css/styles.css';
 
-import Widget from '@/components/blocks/Widget';
-import {
-  WIDGET_SYSTEM_STATUS,
-  WIDGET_SWAP_CURVES,
-  WIDGET_GOVI_CURVES,
-  WIDGET_KURS,
-  WIDGET_GRUPPE,
-  WIDGET_TX_DATENBAUM,
-  WIDGET_SQ_DATENBAUM,
-  WIDGET_RSX_BOTTOM_UP,
-  WIDGET_CHECK_SCORE_CARD,
-  WIDGET_SCHEDULING,
-} from '@/constants/widgets';
+import largeLayoutItems from './layouts/large';
+import middleLayoutItems from './layouts/middle';
+import smallLayoutItems from './layouts/small';
 
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
-const itemsList = [
-  {
-    i: WIDGET_SYSTEM_STATUS.type,
-    Component: props => <Widget {...props} {...WIDGET_SYSTEM_STATUS} />,
-    x: 0,
-    y: 0,
-    w: WIDGET_SYSTEM_STATUS.defaultWidth,
-    h: WIDGET_SYSTEM_STATUS.defaultHeight,
-    minW: WIDGET_SYSTEM_STATUS.minWidth,
-    minH: WIDGET_SYSTEM_STATUS.minHeight,
-  },
-  {
-    i: WIDGET_SWAP_CURVES.type,
-    Component: props => <Widget {...props} {...WIDGET_SWAP_CURVES} />,
-    x: 4,
-    y: 0,
-    w: WIDGET_SWAP_CURVES.defaultWidth,
-    h: WIDGET_SWAP_CURVES.defaultHeight,
-    minW: WIDGET_SWAP_CURVES.minWidth,
-    minH: WIDGET_SWAP_CURVES.minHeight,
-  },
-  {
-    i: WIDGET_GOVI_CURVES.type,
-    Component: props => <Widget {...props} {...WIDGET_GOVI_CURVES} />,
-    x: 8,
-    y: 0,
-    w: WIDGET_GOVI_CURVES.defaultWidth,
-    h: WIDGET_GOVI_CURVES.defaultHeight,
-    minW: WIDGET_GOVI_CURVES.minWidth,
-    minH: WIDGET_GOVI_CURVES.minHeight,
-  },
-  {
-    i: WIDGET_KURS.type,
-    Component: props => <Widget {...props} {...WIDGET_KURS} />,
-    x: 12,
-    y: 0,
-    w: WIDGET_KURS.defaultWidth,
-    h: WIDGET_KURS.defaultHeight,
-    minW: WIDGET_KURS.minWidth,
-    minH: WIDGET_KURS.minHeight,
-  },
-  {
-    i: WIDGET_GRUPPE.type,
-    Component: props => <Widget {...props} {...WIDGET_GRUPPE} />,
-    x: 16,
-    y: 0,
-    w: WIDGET_GRUPPE.defaultWidth,
-    h: WIDGET_GRUPPE.defaultHeight,
-    minW: WIDGET_GRUPPE.minWidth,
-    minH: WIDGET_GRUPPE.minHeight,
-  },
-  {
-    i: WIDGET_TX_DATENBAUM.type,
-    Component: props => <Widget {...props} {...WIDGET_TX_DATENBAUM} />,
-    x: 0,
-    y: 3,
-    w: WIDGET_TX_DATENBAUM.defaultWidth,
-    h: WIDGET_TX_DATENBAUM.defaultHeight,
-    minW: WIDGET_TX_DATENBAUM.minWidth,
-    minH: WIDGET_TX_DATENBAUM.minHeight,
-  },
-  {
-    i: WIDGET_CHECK_SCORE_CARD.type,
-    Component: props => <Widget {...props} {...WIDGET_CHECK_SCORE_CARD} />,
-    x: 4,
-    y: 3,
-    w: WIDGET_CHECK_SCORE_CARD.defaultWidth,
-    h: WIDGET_CHECK_SCORE_CARD.defaultHeight,
-    minW: WIDGET_CHECK_SCORE_CARD.minWidth,
-    minH: WIDGET_CHECK_SCORE_CARD.minHeight,
-  },
-  {
-    i: WIDGET_SCHEDULING.type,
-    Component: props => <Widget {...props} {...WIDGET_SCHEDULING} />,
-    x: 16,
-    y: 3,
-    w: WIDGET_SCHEDULING.defaultWidth,
-    h: WIDGET_SCHEDULING.defaultHeight,
-    minW: WIDGET_SCHEDULING.minWidth,
-    minH: WIDGET_SCHEDULING.minHeight,
-  },
-  {
-    i: WIDGET_SQ_DATENBAUM.type,
-    Component: props => <Widget {...props} {...WIDGET_SQ_DATENBAUM} />,
-    x: 0,
-    y: 6,
-    w: WIDGET_SQ_DATENBAUM.defaultWidth,
-    h: WIDGET_SQ_DATENBAUM.defaultHeight,
-    minW: WIDGET_SQ_DATENBAUM.minWidth,
-    minH: WIDGET_SQ_DATENBAUM.minHeight,
-  },
-  {
-    i: WIDGET_RSX_BOTTOM_UP.type,
-    Component: props => <Widget {...props} {...WIDGET_RSX_BOTTOM_UP} />,
-    x: 0,
-    y: 9,
-    w: WIDGET_RSX_BOTTOM_UP.defaultWidth,
-    h: WIDGET_RSX_BOTTOM_UP.defaultHeight,
-    minW: WIDGET_RSX_BOTTOM_UP.minWidth,
-    minH: WIDGET_RSX_BOTTOM_UP.minHeight,
-  },
-];
 
 class HomePage extends React.PureComponent {
   constructor(props) {
     super(props);
 
     this.state = {
-      prevItems: itemsList,
-      items: itemsList,
+      breakpoint: 'lg',
+      prevItems: largeLayoutItems,
+      items: largeLayoutItems,
     };
   }
 
@@ -175,6 +64,30 @@ class HomePage extends React.PureComponent {
     }
   }
 
+  onBreakpointChange = (breakpoint) => {
+    const { breakpoint: oldBreakpoint } = this.state;
+
+    if (oldBreakpoint !== breakpoint) {
+      let items = [];
+
+      switch (breakpoint) {
+        case 'md':
+        case 'sm':
+        case 'xs':
+          items = middleLayoutItems;
+          break;
+        case 'xxs':
+          items = smallLayoutItems;
+          break;
+        default:
+          items = largeLayoutItems;
+          break;
+      }
+
+      this.setState({ items });
+    }
+  }
+
   onRemoveItem = i => () => {
     const { items } = this.state;
     const rejectedItems = reject(items, { i });
@@ -198,22 +111,23 @@ class HomePage extends React.PureComponent {
     const { items } = this.state;
     return (
       <ResponsiveReactGridLayout
+        onBreakpointChange={this.onBreakpointChange}
         onLayoutChange={this.onLayoutChange}
         breakpoints={{
           lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0,
         }}
         cols={{
-          lg: 20, md: 20, sm: 20, xs: 20, xxs: 20,
+          lg: 20, md: 8, sm: 8, xs: 8, xxs: 4,
         }}
         rowHeight={40}
         margin={[20, 20]}
         containerPadding={[0, 0]}
         layouts={{
           lg: items,
-          md: items,
-          sm: items,
-          xs: items,
-          xxs: items,
+          md: middleLayoutItems,
+          sm: middleLayoutItems,
+          xs: middleLayoutItems,
+          xxs: smallLayoutItems,
         }}
         {...this.props}
       >

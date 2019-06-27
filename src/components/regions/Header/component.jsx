@@ -30,7 +30,7 @@ const HeaderComponent = () => {
           <ChipPart last>Q17</ChipPart>
         </Chip>
       </Section>
-      <Section navigation>
+      <Section navigation notForMobile>
         <NavLink href="#">CHECKS</NavLink>
         <NavLink href="#">SCHEDULING</NavLink>
         <NavLink href="#">REPORTS</NavLink>

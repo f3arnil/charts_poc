@@ -24,8 +24,6 @@ export const WIDGET_TITLES = {
   [WIDGET_TYPES.CHECK_SCORE_CARD]: 'CHECK SCORECARD',
 };
 
-export const DEFAULT_CONTAINER_SIZE = 1920;
-
 export const WIDGET_SYSTEM_STATUS = {
   type: WIDGET_TYPES.SYSTEM_STATUS,
   title: WIDGET_TITLES.SYSTEM_STATUS,
@@ -102,18 +100,18 @@ export const WIDGET_CHECK_SCORE_CARD = {
   type: WIDGET_TYPES.CHECK_SCORE_CARD,
   title: WIDGET_TITLES.CHECK_SCORE_CARD,
   minWidth: 10,
-  minHeight: 10.5,
+  minHeight: 11,
   defaultWidth: 12,
-  defaultHeight: 10.5,
+  defaultHeight: 11,
 };
 
 export const WIDGET_SCHEDULING = {
   type: WIDGET_TYPES.SCHEDULING,
   title: WIDGET_TITLES.SCHEDULING,
   minWidth: 3,
-  minHeight: 10,
+  minHeight: 11,
   defaultWidth: 4,
-  defaultHeight: 10,
+  defaultHeight: 11,
 };
 
 export const WIDGET_WITH_SUB_ITEMS = 'WIDGET_WITH_SUB_ITEMS';

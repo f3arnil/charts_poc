@@ -18,6 +18,10 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
     font-size: 14px;
     padding: 18px 34px;
+
+    @media only screen and (max-width: 768px) {
+      padding: 18px;
+    }
   }
 
   .react-resizable-handle.react-resizable-handle-se {

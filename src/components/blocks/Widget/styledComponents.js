@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import Popup from 'reactjs-popup';
 
 export const WidgetBlock = styled.div`
   background: ${props => props.theme.colors.bunker};
@@ -13,11 +14,28 @@ export const WidgetBlock = styled.div`
   }
 `;
 
-export const WidgetDeleteModal = styled.div`
-  background: ${props => props.theme.colors.white};
-  color: ${props => props.theme.colors.bunker};
-  border: none;
-  margin-bottom: 5px;
+export const WidgetDeleteModal = styled(Popup)`
+  &-content {
+    background: ${props => props.theme.colors.mirage} !important;
+    color: ${props => props.theme.colors.white} !important;
+    border: 1px solid ${props => props.theme.colors.halfBaked} !important;
+    width: 65% !important;
+    padding: 15px !important;
+    box-shadow: 0px 14px 14px rgba(0, 0, 0, 0.35);
+    border-radius: 8px;
+    opacity: 0.9;
+
+    p {
+      font-weight: bold;
+      font-size: 14px;
+      line-height: 32px;
+      text-transform: uppercase;
+    }
+  }
+`;
+
+export const WidgetDeleteModalContent = styled.div`
+  opacity: 1;
 `;
 
 export const WidgetDeleteControls = styled.div`
